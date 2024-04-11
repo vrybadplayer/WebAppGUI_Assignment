@@ -12,54 +12,101 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap">
         <link rel="stylesheet" href="products.css">
         <title>Products</title>
+        <%@page import="domain.Product" %>
+        <%@page import="java.util.Random" %>
     </head>
-    <body>
+    <body>    
+
+        <%
+            Product prod = Product.SearchProduct(1001);
+        %>
+
         <div class="main-container">
-            <span class="course-title">Hu Tao Mechanics Course</span>
+            <span class="course-title"><%= prod.getName()%></span>
             <div class="flex-row-ffc">
                 <div class="overview-box">
-                    <span class="course-title-1">Hu Tao Mechanics Course<br>Full Walkthrough<br><br><br></span>
+                    <span class="course-title-1"><%= prod.getName()%><br>Full Walkthrough<br><br><br></span>
                     <div class="organizer-contributor">
-                        <span class="by">by </span><span class="baoyao">baoyao</span><span class="by-2">, </span><span class="baoyao-3">wymen</span>
+                        <span class="by">by </span><span class="organizer"><%= prod.getOrganizer()%></span><span class="by-2">, </span><span class="contributor"><%= prod.getContributor()%></span>
                     </div>
                     <div class="flex-row-aad">
                         <div class="category-logo"></div>
-                        <span class="category">Character Guide</span>
+                        <span class="category"><%= prod.getCategory()%></span>
                     </div>
                     <div class="flex-row-b">
                         <div class="experience-level-logo"></div>
-                        <span class="experience">Beginner to Advanced</span>
+                        <span class="experience"><%= prod.getLevel()%></span>
                     </div>
                     <div class="flex-row-ae">
                         <div class="skills-logo"></div>
                         <span class="title">Skills Gained:</span>
                     </div>
-                    <span class="skill">Animation Cancel</span><span class="most-optimal-compositions">Most Optimal Compositions</span>
+
+                    <%
+                        String skills = prod.getSkills();
+                        String[] skillsArr = skills.split(", ");
+                    %>
+
+                    <span class="skill"><%= skillsArr[0]%></span><span class="skill2"><%= skillsArr[1]%></span>
                     <div class="flex-row-ccb">
                         <div class="duration-logo"></div>
-                        <span class="duration">8 weeks</span>
+                        <span class="duration"><%= prod.getDuration()%> weeks</span>
                     </div>
                     <div class="flex-row">
                         <div class="price-logo"></div>
-                        <span class="price">RM 59.90</span>
+                        <span class="price">RM <%= prod.getPrice()%></span>
                     </div>
                     <div class="button"><button class="add-to-cart">Add to Cart</button></div>
                 </div>
-                <span class="synopsis">Learn the essentials of Hu Tao and build your skills, teams and playstyle to clear your Spiral Abyss with ease.</span>
+                <span class="synopsis"><%= prod.getSynopsis()%></span>
                 <div class="box">
-                    <span class="review-amount">(100 reviews)</span><span class="rating-score">5.0</span>
-                    <div class="star"></div>
-                    <div class="star-4"></div>
-                    <div class="star-5"></div>
-                    <div class="star-6"></div>
-                    <div class="star-7"></div>
+
+                    <%
+                        Random rand = new Random();
+                        int randNum = rand.nextInt(1000);
+                    %>
+
+                    <span class="review-amount">(<%= randNum%> reviews)</span><span class="rating-score"><%= prod.getRating()%></span>
+
+                    <%
+                        if (prod.getRating() >= 1) {
+                            out.println("<div class=\"star-7\"></div>");
+                        }
+                        if (prod.getRating() >= 2) {
+                            out.println("<div class=\"star-6\"></div>");
+                        }
+                        if (prod.getRating() >= 3) {
+                            out.println("<div class=\"star-5\"></div>");
+                        }
+                        if (prod.getRating() >= 4) {
+                            out.println("<div class=\"star-4\"></div>");
+                        }
+                        if (prod.getRating() >= 4.5) {
+                            out.println("<div class=\"star\"></div>");
+                        }
+                    %>
+
                 </div>
                 <div class="course-image"></div>
             </div>
             <div class="background"></div>
             <div class="flex-row-abc">
                 <div class="divider"></div>
-                <span class="description">This course guides you from absolute beginner to being a top-notch Hu Tao player; fully explaining the purpose of each artifact set while taking team composition and weapons into consideration. </span><span class="module-list">Introduction to Hu Tao<br>Artifacts Debunking<br>Team Composition<br>Weapon Recommendations<br>Team Rotation<br>Animation Cancel</span>
+
+                <span class="objective"><%= prod.getObjective()%>
+
+                </span><span class="module-list">
+
+                    <%
+                        String modules = prod.getModules();
+                        String[] modulesArr = modules.split(", ");
+
+                        for (int i = 0; i < modulesArr.length; ++i) {
+                            out.println(modulesArr[i] + "<br>");
+                        }
+                    %>
+
+                </span>
                 <div class="button-8">
                     <button class="join-course-now">Join Course Now</button>
                 </div>
