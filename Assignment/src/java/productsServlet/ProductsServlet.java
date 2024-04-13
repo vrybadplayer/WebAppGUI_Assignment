@@ -1,13 +1,13 @@
-package com.org.myservlet;
+package productsServlet;
 
 import domain.CartOrders;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -73,7 +73,13 @@ public class ProductsServlet extends HttpServlet {
         //param get to get custid and prodid from jsp, then pass into fucntion
         int CustID = Integer.parseInt(request.getParameter("custId"));
         int ProdID = Integer.parseInt(request.getParameter("prodId"));
-        CartOrders.AddToCart(1000, CustID, ProdID, "2004-01-09");
+        
+        //Think of a way to auto increment the HKPK
+        CartOrders.AddToCart(1001, CustID, ProdID, "2004-01-09");
+        
+        //redirect back to jsp
+        //Also think of a way to pop-up display that customer added to cart
+        response.sendRedirect("Products.jsp");
     }
 
     /**

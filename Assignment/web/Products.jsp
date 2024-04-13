@@ -19,7 +19,7 @@
     <body>    
 
         <%
-            Product prod = Product.SearchProduct(1000);
+            Product prod = Product.SearchProduct(1001);
             Customer cust = Customer.SearchCustomer(1000);
         %>
 
@@ -64,7 +64,7 @@
                     <!-- In the button, initialize/get the cust and prod id's which is to be passed to Servlet -->
 
                     <div class="button">
-                        <form method="get" action="ProductsServlet">
+                        <form method="post" action="ProductsServlet">
                             <input type="hidden" name="prodId" value="<%= prod.getId()%>">
                             <input type="hidden" name="custId" value="<%= cust.getCustID()%>">
                             <button class="add-to-cart" type="submit">Add To Cart</button>
