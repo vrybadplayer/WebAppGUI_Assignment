@@ -1,5 +1,6 @@
 package com.org.myservlet;
 
+import domain.CartOrders;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,7 +33,7 @@ public class ProductsServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductsServlet</title>");            
+            out.println("<title>Servlet ProductsServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ProductsServlet at " + request.getContextPath() + "</h1>");
@@ -64,10 +65,15 @@ public class ProductsServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    //This is to put data into table once user clicked add to cart button
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        //param get to get custid and prodid from jsp, then pass into fucntion
+        int CustID = Integer.parseInt(request.getParameter("custId"));
+        int ProdID = Integer.parseInt(request.getParameter("prodId"));
+        CartOrders.AddToCart(1000, CustID, ProdID, "2004-01-09");
     }
 
     /**

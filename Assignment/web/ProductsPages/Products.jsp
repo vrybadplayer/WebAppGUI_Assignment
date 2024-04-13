@@ -4,6 +4,7 @@
     Author     : ASUS
 --%>
 
+<%@page import="domain.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,8 @@
     <body>    
 
         <%
-            Product prod = Product.SearchProduct(1001);
+            Product prod = Product.SearchProduct(1000);
+            Customer cust = Customer.SearchCustomer(1000);
         %>
 
         <div class="main-container">
@@ -48,15 +50,27 @@
                     %>
 
                     <span class="skill"><%= skillsArr[0]%></span><span class="skill2"><%= skillsArr[1]%></span>
+
                     <div class="flex-row-ccb">
                         <div class="duration-logo"></div>
                         <span class="duration"><%= prod.getDuration()%> weeks</span>
                     </div>
+
                     <div class="flex-row">
                         <div class="price-logo"></div>
                         <span class="price">RM <%= prod.getPrice()%></span>
                     </div>
-                    <div class="button"><button class="add-to-cart">Add to Cart</button></div>
+
+                    <!-- In the button, initialize/get the cust and prod id's which is to be passed to Servlet -->
+
+                    <div class="button">
+                        <form method="get" action="ProductsServlet">
+                            <input type="hidden" name="prodId" value="<%= prod.getId()%>">
+                            <input type="hidden" name="custId" value="<%= cust.getCustID()%>">
+                            <button class="add-to-cart" type="submit">Add To Cart</button>
+                        </form>
+                    </div>
+
                 </div>
                 <span class="synopsis"><%= prod.getSynopsis()%></span>
                 <div class="box">

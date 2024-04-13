@@ -112,10 +112,6 @@ public class Product {
     public double getRating() {
         return rating;
     }
-
-    public void printSkills(int input) {
-        System.out.println("test");
-    }
     
     //Returns Product Object
     public static Product SearchProduct(int prodID) {
@@ -151,9 +147,7 @@ public class Product {
                 }
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "SQLException Error", "ERROR", JOptionPane.WARNING_MESSAGE);
         }
-        JOptionPane.showMessageDialog(null, "Product Does Not Exist", "ERROR", JOptionPane.INFORMATION_MESSAGE);
         return null;
     }
 

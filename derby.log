@@ -1,7 +1,7 @@
-Thu Apr 11 15:09:24 MYT 2024 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
+Sat Apr 13 10:25:05 MYT 2024 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Thu Apr 11 15:09:49 MYT 2024:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-018e-cbfd-6399-000016a9e0e3 
+Sat Apr 13 10:25:05 MYT 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-018e-d545-ccfc-000016a9e0e3 
 on database directory C:\Users\ASUS\Documents\NetBeansProjects\WebAppGUI_Assignment\SmartLearnDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/ASUS/glassfish4/javadb/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,3 +12,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\ASUS\Documents\NetBeansProjects\WebAppGUI_Assignment
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Sat Apr 13 11:15:14 MYT 2024: Shutting down Derby engine
+----------------------------------------------------------------
+Sat Apr 13 11:15:14 MYT 2024:
+Shutting down instance a816c00e-018e-d545-ccfc-000016a9e0e3 on database directory C:\Users\ASUS\Documents\NetBeansProjects\WebAppGUI_Assignment\SmartLearnDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
+----------------------------------------------------------------
