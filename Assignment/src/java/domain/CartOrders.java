@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,6 +39,23 @@ public class CartOrders {
         this.date = date;
     }
 
+    public int getHKPK() {
+        return HKPK;
+    }
+
+    public int getCustId() {
+        return custId;
+    }
+
+    public int getProdId() {
+        return prodId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    //Need to use UTX instead of JDBC
     public static void AddToCart(int hkpk, int cust, int prod, String date) {
         //Connection
         try (Connection conn = DriverManager.getConnection(url, username, password)) {
@@ -64,4 +82,35 @@ public class CartOrders {
         }
     }
 
+    //Search HKPK for auto increment
+    public static int NextHKPK() {
+
+        ArrayList<CartOrders> orderList = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            String sql = "SELECT * FROM " + tableName;
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        CartOrders cartOrder = new CartOrders(
+                                rs.getInt("HKPK"),
+                                rs.getInt("CustID"),
+                                rs.getInt("ProdID"),
+                                rs.getString("CheckoutDate")
+                        );
+                        orderList.add(cartOrder);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+        }
+
+        //Get the last HKPK and add 1
+        if (orderList.size() == 0) {
+            return 1000;
+        }
+        int nextHKPK = orderList.get(orderList.size() - 1).getHKPK() + 1;
+        return nextHKPK;
+
+    }
 }

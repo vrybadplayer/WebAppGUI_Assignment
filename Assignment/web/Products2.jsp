@@ -18,6 +18,23 @@
         <%@page import="java.util.Random" %>
         <%@page import="domain.Customer"%>
         <jsp:useBean id="customer" scope="session" class="domain.Customer" />
+
+        <script>
+            function togglePopup() {
+                document.getElementById("popup-1").classList.toggle("active");
+            }
+
+            window.onload = function () {
+                togglePopup();
+            };
+
+            function closePopup() {
+                var popup = document.getElementById("popup-1");
+                popup.classList.add("deactivate");
+                popup.classList.remove("active");
+            }
+        </script>
+
     </head>
     <body>    
 
@@ -26,6 +43,16 @@
             Product prod = Product.SearchProduct(1000);
             Customer cust = Customer.SearchCustomer(1000);
         %>
+
+        <div class="popup" id="popup-1">
+            <div class="overlay">
+                <div class="content">
+                    <button class="close-btn" onclick="closePopup()">&times;</button>
+                    <h1>Notice</h1>
+                    <p>Your item has been successfully added to cart.</p>
+                </div>
+            </div>    
+        </div>
 
         <div class="main-container">
             <span class="course-title"><%= prod.getName()%></span>
@@ -68,10 +95,8 @@
                     <!-- In the button, initialize/get the cust and prod id's which is to be passed to Servlet -->
 
                     <div class="button">
-                        <form method="post" action="ProductsServlet">
-                            <input type="hidden" name="prodId" value="<%= prod.getId()%>">
-                            <input type="hidden" name="custId" value="<%= cust.getCustID()%>">
-                            <button class="add-to-cart" type="submit">Add To Cart</button>
+                        <form>
+                            <button class="add-to-cart" type="submit" onclick="togglePopup()">Add To Cart</button>
                         </form>
                     </div>
 
@@ -127,12 +152,11 @@
                 </span>
 
                 <div class="button-8">
-                    <form method="post" action="ProductsServlet">
-                        <input type="hidden" name="prodId" value="<%= prod.getId()%>">
-                        <input type="hidden" name="custId" value="<%= cust.getCustID()%>">
-                        <button class="join-course-now">Join Course Now</button>
+                    <form>
+                        <button class="join-course-now" onclick="togglePopup()">Join Course Now</button>
                     </form>
                 </div>
+
             </div>
             <div class="flex-row-f">
                 <span class="modules">Modules</span><span class="objectives">Objectives</span>
