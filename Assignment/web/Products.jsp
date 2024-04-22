@@ -15,16 +15,15 @@
         <link rel="stylesheet" href="products.css">
         <title>Products</title>
         <%@page import="domain.Product" %>
-        <%@page import="java.util.Random" %>
         <%@page import="domain.Customer"%>
         <jsp:useBean id="customer" scope="session" class="domain.Customer" />
     </head>
     <body>    
 
         <%
-            //This needs to be changed to JavaBeans
-            Product prod = Product.SearchProduct(1000);
-            Customer cust = Customer.SearchCustomer(1000);
+            int prodId = Integer.parseInt(request.getParameter("productId"));
+            Product prod = Product.SearchProduct(prodId);
+            Customer cust = Customer.SearchCustomer(1000); //Needs to be changed
         %>
 
         <div class="main-container">
@@ -65,7 +64,10 @@
                         <span class="price">RM <%= prod.getPrice()%></span>
                     </div>
 
-                    <!-- In the button, initialize/get the cust and prod id's which is to be passed to Servlet -->
+                    <!-- 
+                    In the button, initialize/get the cust and prod id's which is to be passed to Servlet 
+                    This is to be changed later by using request.getParameter();
+                    -->
 
                     <div class="button">
                         <form method="post" action="ProductsServlet">
@@ -79,12 +81,8 @@
                 <span class="synopsis"><%= prod.getSynopsis()%></span>
                 <div class="box">
 
-                    <%
-                        Random rand = new Random();
-                        int randNum = rand.nextInt(1000);
-                    %>
 
-                    <span class="review-amount">(<%= randNum%> reviews)</span><span class="rating-score"><%= prod.getRating()%></span>
+                    <span class="review-amount">(<% out.println(prod.getReviews());%> reviews)</span><span class="rating-score"><%= prod.getRating()%></span>
 
                     <%
                         if (prod.getRating() >= 1) {

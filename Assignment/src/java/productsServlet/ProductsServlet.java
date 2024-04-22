@@ -65,6 +65,8 @@ public class ProductsServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    
     //This is to put data into table once user clicked add to cart button
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

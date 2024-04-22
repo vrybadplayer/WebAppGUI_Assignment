@@ -109,7 +109,7 @@
                         int randNum = rand.nextInt(1000);
                     %>
 
-                    <span class="review-amount">(<%= randNum%> reviews)</span><span class="rating-score"><%= prod.getRating()%></span>
+                    <span class="review-amount">(<% out.println(prod.getReviews());%> reviews)</span><span class="rating-score"><%= prod.getRating()%></span>
 
                     <%
                         if (prod.getRating() >= 1) {

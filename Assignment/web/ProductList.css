@@ -1,0 +1,163 @@
+:root {
+  --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
+    "Source Han Sans CN", sans-serif;
+}
+
+.main-container {
+  overflow: hidden;
+}
+
+.main-container,
+.main-container * {
+  box-sizing: border-box;
+}
+
+input,
+select,
+textarea,
+button {
+  outline: 0;
+}
+
+.main-container {
+  position: relative;
+  width: 1600px;
+  height: 1600px;
+  margin: 0 auto;
+}
+.background {
+  position: relative;
+  width: 1600px;
+  height: 1505px;
+  margin: -5px 0 0 -16px;
+  font-size: 0px;
+  background: #ffffff;
+  overflow: visible auto;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.8);
+}
+.category-name {
+  display: block;
+  position: relative;
+  height: 74px;
+  margin: 79px 0 0 115px;
+  color: #000000;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 73.536px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 64;
+}
+.flex-row-fcb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 1419px;
+  height: 343px;
+  margin: 64px 0 0 115px;
+  z-index: 58;
+}
+.box {
+  flex-shrink: 0;
+  position: relative;
+  width: 481px;
+  height: 402px;
+  background: url(./assets/images/4a5e79fe-b31f-42f4-936e-f7ec768d0bb1.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 58;
+  transition: transform 0.3s ease-in-out;
+}
+.box:hover {
+  transform: scale(1.05); /* Enlarge by 5% */
+}
+.course-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: absolute;
+  height: 27px;
+  top: 263px;
+  left: 45px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 22.98px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 60;
+}
+.reviews {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  width: 123px;
+  height: 18px;
+  top: 268px;
+  left: 305px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 63;
+}
+.description {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: absolute;
+  width: 242px;
+  height: 49px;
+  top: 299px;
+  left: 45px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 14.937px;
+  text-align: left;
+  z-index: 59;
+}
+.price {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  width: 123px;
+  height: 28px;
+  top: 310px;
+  left: 305px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 27.576px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 62;
+}
+
+.course-image {
+  position: relative;
+  width: 421px;
+  height: 222px;
+  margin: 24px 0 0 25px;
+  z-index: 61;
+  border-radius: 25px 25px 0 0;
+  overflow: hidden; /* Ensure the image stays within the boundaries */
+}
+
+.course-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

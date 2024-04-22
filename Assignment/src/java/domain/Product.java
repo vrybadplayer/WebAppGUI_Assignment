@@ -1,6 +1,7 @@
 package domain;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Product {
 
@@ -22,13 +23,14 @@ public class Product {
     private String objective;
     private String category;
     private double rating;
+    private int reviews;
 
     //Products Constructor
     public Product() {
         
     }
     
-    public Product(int id, String name, double price, String synopsis, int duration, String level, String organizer, String contributor, String skills, String modules, String objective, String category, double rating) {
+    public Product(int id, String name, double price, String synopsis, int duration, String level, String organizer, String contributor, String skills, String modules, String objective, String category, double rating, int reviews) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -42,6 +44,7 @@ public class Product {
         this.objective = objective;
         this.category = category;
         this.rating = rating;
+        this.reviews = reviews;
     }
 
     public int getId() {
@@ -112,6 +115,10 @@ public class Product {
         return rating;
     }
     
+    public double getReviews() {
+        return reviews;
+    }
+    
     //Returns Product Object
     public static Product SearchProduct(int prodID) {
 
@@ -139,7 +146,8 @@ public class Product {
                                 rs.getString("Modules"),
                                 rs.getString("Objective"),
                                 rs.getString("Category"),
-                                rs.getDouble("Rating")
+                                rs.getDouble("Rating"),
+                                rs.getInt("Reviews")
                         );
                         return product;
                     }
@@ -149,5 +157,49 @@ public class Product {
         }
         return null;
     }
+    
+    //Returns Product List
+    public static ArrayList<Product> SearchCategory(String category) {
+    ArrayList<Product> productList = new ArrayList<>();
+    //Connection
+    try (Connection conn = DriverManager.getConnection(url, username, password)) {
+        String sql = "SELECT * FROM " + tableName + " WHERE Category = ?";
+
+        //Prepare SQL Statement
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, category);
+
+            //Get ResultSet
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Product product = new Product(
+                            rs.getInt("ProdID"),
+                            rs.getString("CourseName"),
+                            rs.getDouble("Price"),
+                            rs.getString("Synopsis"),
+                            rs.getInt("Duration"),
+                            rs.getString("Experience_Level"),
+                            rs.getString("Organizer"),
+                            rs.getString("Contributor"),
+                            rs.getString("Skills_Gained"),
+                            rs.getString("Modules"),
+                            rs.getString("Objective"),
+                            rs.getString("Category"),
+                            rs.getDouble("Rating"),
+                            rs.getInt("Reviews")
+                    );
+
+                    productList.add(product);
+                }
+            }
+        }
+        
+        return productList;
+        
+    } catch (SQLException ex) {
+        ex.printStackTrace(); // Handle the exception properly in your application
+    }
+    return null;
+}
 
 }
