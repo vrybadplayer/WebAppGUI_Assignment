@@ -76,37 +76,43 @@ public class AddStaffDetails extends HttpServlet {
             throws ServletException, IOException {
         boolean errorExist = false;
         StaffDA staffDA = new StaffDA();
-//        //validate id
-        do {
-            String staffId = request.getParameter("staffId");
-            if (staffDA.searchId(Integer.parseInt(staffId))) {
-                errorExist = true;
-                try (PrintWriter error = response.getWriter()) {
-                    error.println("<!DOCTYPE html>");
-                    error.println("<html>");
-                    error.println("<body>");
-                    error.println("<script type=\"text/javascript\">alert('The employee with the entered StaffID already exist!');");
-                    error.println("window.open('staffAdd.html', '_self');");
-                    error.println("</script>");
-                    error.println("</body>");
-                    error.println("</html>");
-                }
-            } else {
-                errorExist = false;
-            }
-        } while (errorExist);
+        //get all parameters
+        String staffId = request.getParameter("staffId");
+        String staffName = request.getParameter("staffName");
+        String staffDOB = request.getParameter("staffDOB");
+        String staffAddress = request.getParameter("addressLine1") + request.getParameter("addressLine2") + request.getParameter("addressLine3");
+        String staffCity = request.getParameter("staffCity");
+        String staffIc = request.getParameter("staffIc");
+        String staffPostCode = request.getParameter("staffPostcode");
+        String staffEmail = request.getParameter("staffEmail");
+        String staffPhone = request.getParameter("staffPhone");
+        String staffPassword = request.getParameter("staffPassword");
+        String staffConfirmPassword = request.getParameter("staffConfirmPassword");
+        String staffRole = request.getParameter("staffRole");
 
-        //validate name
+        //validate id
         do {
-            String staffName = request.getParameter("staffName");
-            for (int i = 0; i < staffName.length(); i++) {
-                if (Character.isDigit(staffName.charAt(i))) {
+            try {
+                if (staffId.equals("")) { //check for empty staff id
                     errorExist = true;
                     try (PrintWriter error = response.getWriter()) {
                         error.println("<!DOCTYPE html>");
                         error.println("<html>");
                         error.println("<body>");
-                        error.println("<script type=\"text/javascript\">alert('Staff Name could only contain alphabets!');");
+                        error.println("<script type=\"text/javascript\">alert('Staff ID cannot be empty!');");
+                        error.println("window.open('staffAdd.html', '_self');");
+                        error.println("</script>");
+                        error.println("</body>");
+                        error.println("</html>");
+                    }
+                    break;
+                } else if (staffDA.searchId(Integer.parseInt(staffId))) { //check for duplicate ids
+                    errorExist = true;
+                    try (PrintWriter error = response.getWriter()) {
+                        error.println("<!DOCTYPE html>");
+                        error.println("<html>");
+                        error.println("<body>");
+                        error.println("<script type=\"text/javascript\">alert('The employee with the entered StaffID already exist!');");
                         error.println("window.open('staffAdd.html', '_self');");
                         error.println("</script>");
                         error.println("</body>");
@@ -116,14 +122,24 @@ public class AddStaffDetails extends HttpServlet {
                 } else {
                     errorExist = false;
                 }
+            } catch (NumberFormatException ex) { //if entered alphabets, catch exception
+                try (PrintWriter error = response.getWriter()) { //catch exception aassuming user key in characters
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Please enter digits for Staff ID only!');");
+                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
             }
         } while (errorExist);
 
         //validate ic
         do {
-            String staffIc = request.getParameter("staffIc");
-            for (int i = 0; i < staffIc.length(); i++) {
-                if (Character.isAlphabetic(staffIc.charAt(i))) {
+            for (int i = 0; i < staffIc.length(); i++) { //check if ic has alphabets
+                if (Character.isAlphabetic(staffIc.charAt(i))) { //check for alphabets in ic
                     errorExist = true;
                     try (PrintWriter error = response.getWriter()) {
                         error.println("<!DOCTYPE html>");
@@ -140,8 +156,22 @@ public class AddStaffDetails extends HttpServlet {
                     errorExist = false;
                 }
             }
-
-            if (staffIc.length() != 12) {
+            int year = Integer.parseInt(staffIc.substring(0, 2)); //check the first 6 digits (dob)
+            int month = Integer.parseInt(staffIc.substring(2, 4));
+            int day = Integer.parseInt(staffIc.substring(4, 6));
+            if (staffIc.equals("")) { //check if ic is empty string
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Staff IC could not be empty!');");
+                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            } else if (staffIc.length() != 12) { //check length of ic, must be 12
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
@@ -153,15 +183,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("</body>");
                     error.println("</html>");
                 }
-                break;
-            } else {
-                errorExist = false;
-            }
-
-            int year = Integer.parseInt(staffIc.substring(0, 2));
-            int month = Integer.parseInt(staffIc.substring(2, 4));
-            int day = Integer.parseInt(staffIc.substring(4, 6));
-            if (year < 0 || year > 99) {
+            } else if ((year >= 33 && year <= 99) && (year >= 0 && year <= 3)) { //year can only be 1933 - 2003
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
@@ -173,13 +195,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("</body>");
                     error.println("</html>");
                 }
-
-                break;
-            } else {
-                errorExist = false;
-            }
-
-            if (month < 1 || month > 12) {
+            } else if (month < 1 || month > 12) { //month can only be 1 - 12
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
@@ -193,7 +209,7 @@ public class AddStaffDetails extends HttpServlet {
                 }
                 break;
             } else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
-                if (day < 1 || day > 31) {
+                if (day < 1 || day > 31) { //month of 1,3,5,7,8,10,12, has 31 days
                     errorExist = true;
                     try (PrintWriter error = response.getWriter()) {
                         error.println("<!DOCTYPE html>");
@@ -207,9 +223,8 @@ public class AddStaffDetails extends HttpServlet {
                     }
                     break;
                 }
-
             } else if (month == 4 || month == 6 || month == 9 || month == 11) {
-                if (day < 1 || day > 30) {
+                if (day < 1 || day > 30) { //month of 4,6,9,11, has 30 days
                     errorExist = true;
                     try (PrintWriter error = response.getWriter()) {
                         error.println("<!DOCTYPE html>");
@@ -224,7 +239,7 @@ public class AddStaffDetails extends HttpServlet {
                     break;
                 }
             } else if (month == 2) {
-                if (day < 1 || day > 29) {
+                if (day < 1 || day > 29) { //month of 2 has 29 days
                     errorExist = true;
                     try (PrintWriter error = response.getWriter()) {
                         error.println("<!DOCTYPE html>");
@@ -245,34 +260,56 @@ public class AddStaffDetails extends HttpServlet {
 
         //validate city
         do {
-            String staffCity = request.getParameter("staffCity");
+            if (staffCity.equals("")) { //check if city is empty
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Staff City could not be empty!');");
+                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            }
             for (int i = 0; i < staffCity.length(); i++) {
-                if (Character.isDigit(staffCity.charAt(i))) {
+                if (Character.isDigit(staffCity.charAt(i))) { //check if city got digits
                     errorExist = true;
                     try (PrintWriter error = response.getWriter()) {
                         error.println("<!DOCTYPE html>");
                         error.println("<html>");
                         error.println("<body>");
-                        error.println("<script type=\"text/javascript\">alert('Staff's City could only consists of alphabets!');");
+                        error.println("<script type=\"text/javascript\">alert('Staff\\'s City could only consists of alphabets!');");
                         error.println("window.open('staffAdd.html', '_self');");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
                     break;
-                } else {
-                    errorExist = false;
                 }
             }
+            errorExist = false;
         } while (errorExist);
 
         //validate email 
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"; //email format
         Pattern pattern = Pattern.compile(emailRegex);
         do {
-            String staffEmail = request.getParameter("staffEmail");
             Matcher matcher = pattern.matcher(staffEmail);
-            if (!matcher.matches()) {
+            if (staffEmail.equals("")) { //check if email is empty
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Staff Email could not be empty!');");
+                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            } else if (!matcher.matches()) { //check if email matches format
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
@@ -284,33 +321,44 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("</body>");
                     error.println("</html>");
                 }
-                break;
+            }
+            errorExist = false;
+        } while (errorExist);
+
+        //validate address
+        do {
+            if (staffAddress.equals("")) {
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Staff Address could not be empty!');");
+                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            } else {
+                errorExist = false;
             }
         } while (errorExist);
 
         //validate postcode
         do {
-            String staffPostCode = request.getParameter("staffPostcode");
-            for (int i = 0; i < staffPostCode.length(); i++) {
-                if (Character.isAlphabetic(staffPostCode.charAt(i))) {
-                    errorExist = true;
-                    try (PrintWriter error = response.getWriter()) {
-                        error.println("<!DOCTYPE html>");
-                        error.println("<html>");
-                        error.println("<body>");
-                        error.println("<script type=\"text/javascript\">alert('Postcode only consists of digits!');");
-                        error.println("window.open('staffAdd.html', '_self');");
-                        error.println("</script>");
-                        error.println("</body>");
-                        error.println("</html>");
-                    }
-                    break;
-                } else {
-                    errorExist = false;
+            if (staffPostCode.equals("")) { //assuming postcode is empty
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Staff Postcode could not be empty!');");
+                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
                 }
-            }
-
-            if (staffPostCode.length() != 5) {
+            } else if (staffPostCode.length() != 5) { // assuming postcode does not have 5 characters
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
@@ -322,57 +370,103 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("</body>");
                     error.println("</html>");
                 }
-                break;
             } else {
+                for (int i = 0; i < staffPostCode.length(); i++) {
+                    if (Character.isAlphabetic(staffPostCode.charAt(i))) {
+                        errorExist = true;
+                        try (PrintWriter error = response.getWriter()) {
+                            error.println("<!DOCTYPE html>");
+                            error.println("<html>");
+                            error.println("<body>");
+                            error.println("<script type=\"text/javascript\">alert('Postcode only consists of digits!');");
+                            error.println("window.open('staffAdd.html', '_self');");
+                            error.println("</script>");
+                            error.println("</body>");
+                            error.println("</html>");
+                        }
+                        break;
+                    }
+                }
                 errorExist = false;
             }
         } while (errorExist);
 
         //validate dob
+        int year = 0;
+        int month = 0;
+        int day = 0;
+        try {
+            year = Integer.parseInt(staffDOB.substring(0, 4)); //extract date from dob
+            month = Integer.parseInt(staffDOB.substring(5, 7));
+            day = Integer.parseInt(staffDOB.substring(8, 10));
+        } catch (IndexOutOfBoundsException ex) {
+            try (PrintWriter error = response.getWriter()) {
+                error.println("<!DOCTYPE html>");
+                error.println("<html>");
+                error.println("<body>");
+                error.println("<script type=\"text/javascript\">alert('Please enter 10 characters');");
+                error.println("window.open('staffAdd.html', '_self');");
+                error.println("</script>");
+                error.println("</body>");
+                error.println("</html>");
+            }
+        }
         do {
-            String staffDOB = request.getParameter("staffDOB");
-            int year = Integer.parseInt(staffDOB.substring(0, 4));
-            int month = Integer.parseInt(staffDOB.substring(5, 7));
-            int day = Integer.parseInt(staffDOB.substring(8, 10));
-            if (staffDOB.charAt(4) != '-' || staffDOB.charAt(7) != '-') {
+            //validate with ic
+            String icYear = staffIc.substring(0, 2);
+            String icMonth = staffIc.substring(2, 4);
+            String icDay = staffIc.substring(4, 6);
+            String dobYear = staffDOB.substring(2, 4);
+            String dobMonth = staffDOB.substring(5, 7);
+            String dobDay = staffDOB.substring(8, 10);
+            if (staffDOB.equals("")) { //check for empty string
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
                     error.println("<html>");
                     error.println("<body>");
-                    error.println("<script type=\"text/javascript\">alert('DOB should be in the format of YYYY-MM-DD');");
+                    error.println("<script type=\"text/javascript\">alert('Staff DOB could not be empty!');");
                     error.println("window.open('staffAdd.html', '_self');");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
-                break;
-            } else if (year < 0 || year < 2003) {
+            } else if (staffDOB.charAt(4) != '-' || staffDOB.charAt(7) != '-') { //check format for date
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
                     error.println("<html>");
                     error.println("<body>");
-                    error.println("<script type=\"text/javascript\">alert('DOB has invalid year');");
+                    error.println("<script type=\"text/javascript\">alert('DOB should be in the format of YYYY-MM-DD');"); //check if date is in correct format
                     error.println("window.open('staffAdd.html', '_self');");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
-                break;
+            } else if (year < 1933 || year > 2003) {
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('DOB has invalid year');"); //check if year is between 1933 - 2003
+                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
             } else if (month < 1 || month > 12) {
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
                     error.println("<html>");
                     error.println("<body>");
-                    error.println("<script type=\"text/javascript\">alert('DOB has invalid month!');");
+                    error.println("<script type=\"text/javascript\">alert('DOB has invalid month!');"); //check if month is between 1 - 12
                     error.println("window.open('staffAdd.html', '_self');");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
-                break;
             } else if (month == 1 | month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
                 if (day < 1 || day > 31) {
                     errorExist = true;
@@ -380,14 +474,12 @@ public class AddStaffDetails extends HttpServlet {
                         error.println("<!DOCTYPE html>");
                         error.println("<html>");
                         error.println("<body>");
-                        error.println("<script type=\"text/javascript\">alert('DOB has invalid day on month!');");
+                        error.println("<script type=\"text/javascript\">alert('DOB has invalid day on month!');"); //check if day is between 1 - 31 for following months
                         error.println("window.open('staffAdd.html', '_self');");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
-
-                    break;
                 }
             } else if (month == 4 || month == 6 || month == 9 || month == 11) {
                 if (day < 1 || day > 30) {
@@ -396,13 +488,12 @@ public class AddStaffDetails extends HttpServlet {
                         error.println("<!DOCTYPE html>");
                         error.println("<html>");
                         error.println("<body>");
-                        error.println("<script type=\"text/javascript\">alert('DOB has invalid day on month!');");
+                        error.println("<script type=\"text/javascript\">alert('DOB has invalid day on month!');"); //check if day is between 1 - 30 for following months
                         error.println("window.open('staffAdd.html', '_self');");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
-                    break;
                 }
             } else if (month == 2) {
                 if (day < 1 || day > 29) {
@@ -411,26 +502,15 @@ public class AddStaffDetails extends HttpServlet {
                         error.println("<!DOCTYPE html>");
                         error.println("<html>");
                         error.println("<body>");
-                        error.println("<script type=\"text/javascript\">alert('DOB has invalid day on month!');");
+                        error.println("<script type=\"text/javascript\">alert('DOB has invalid day on month!');"); //check if fay exceeds 29 for february
                         error.println("window.open('staffAdd.html', '_self');");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
-                    break;
                 }
-            } else {
-                errorExist = false;
             }
-
-            //validate with ic
-            String icYear = request.getParameter("staffIc").substring(0, 2);
-            String icMonth = request.getParameter("staffIc").substring(2, 4);
-            String icDay = request.getParameter("staffIc").substring(4, 6);
-            String dobYear = request.getParameter("staffDOB").substring(2, 4);
-            String dobMonth = request.getParameter("staffDOB").substring(5, 7);
-            String dobDay = request.getParameter("staffDOB").substring(8, 10);
-            if (!icYear.equals(dobYear) || !icMonth.equals(dobMonth) || !icDay.equals(dobDay)) {
+            if (!icYear.equals(dobYear) || !icMonth.equals(dobMonth) || !icDay.equals(dobDay)) { //check dob on ic with actual value
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
@@ -442,58 +522,79 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("</body>");
                     error.println("</html>");
                 }
-                break;
-            }else{
+            } else {
                 errorExist = false;
             }
         } while (errorExist);
 
         //validate tel no
         do {
-            String staffPhone = request.getParameter("staffPhone");
-            for (int i = 0; i < staffPhone.length(); i++) {
+            if (staffPhone.equals("")) { //check if tel no is empty
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Staff Phone Number could not be empty!');");
+                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            }
+            for (int i = 0; i < staffPhone.length(); i++) { //check if telephone contains alphabets
                 if (Character.isAlphabetic(staffPhone.charAt(i))) {
                     errorExist = true;
                     try (PrintWriter error = response.getWriter()) {
                         error.println("<!DOCTYPE html>");
                         error.println("<html>");
                         error.println("<body>");
-                        error.println("<script type=\"text/javascript\">alert('Phone Number could only consists of digits!');");
+                        error.println("<script type=\"text/javascript\">alert('Phone Number could only consists of digits!');"); //check for alphabets
                         error.println("window.open('staffAdd.html', '_self');");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
                     break;
-
                 }
             }
-            if (staffPhone.length() != 10 || staffPhone.length() != 11) {
+
+            if (staffPhone.length() != 10 && staffPhone.length() != 11) { //check if phone number has 11 or 10 digits
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
                     error.println("<html>");
                     error.println("<body>");
-                    error.println("<script type=\"text/javascript\">alert('Phone Number only consists of 5 digits!');");
+                    error.println("<script type=\"text/javascript\">alert('Phone Number only consists of 10 or 11 digits!');"); //check length of phoneNumber
                     error.println("window.open('staffAdd.html', '_self');");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
                 break;
-            } else {
-                errorExist = false;
             }
+            errorExist = false;
         } while (errorExist);
 
         //validate password
-        String passwordRegex = "^(?=.*[A-Z])(?=.*\\d).{8,}$";
+        String passwordRegex = "^(?=.*[A-Z])(?=.*\\d).{8,}$"; //1 capital letter, 1 digit, total 8 characters
         Pattern passwordPattern = Pattern.compile(passwordRegex);
+
         do {
-            String staffPassword = request.getParameter("staffPassword");
-            String staffConfirmPassword = request.getParameter("staffConfirmPassword");
             Matcher matcher = passwordPattern.matcher(staffPassword);
-            if (!matcher.matches()) {
+            if (staffPassword.equals("") || staffConfirmPassword.equals("")) { //check if password inputs are empty
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Staff Password could not be empty!');");
+                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            } else if (!matcher.matches()) { //check if first password matches format
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
@@ -506,7 +607,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("</html>");
                 }
                 break;
-            } else if (!staffPassword.equals(staffConfirmPassword)) {
+            } else if (!staffPassword.equals(staffConfirmPassword)) { //check if both passwords match
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
@@ -525,76 +626,86 @@ public class AddStaffDetails extends HttpServlet {
             }
         } while (errorExist);
 
-        //role
+        //validate role
         do {
-            String staffRole = request.getParameter("staffRole");
-            for (int i = 0; i < staffRole.length(); i++) {
-                if (Character.isDigit(staffRole.charAt(i))) {
-                    errorExist = true;
-                    try (PrintWriter error = response.getWriter()) {
-                        error.println("<!DOCTYPE html>");
-                        error.println("<html>");
-                        error.println("<body>");
-                        error.println("<script type=\"text/javascript\">alert('Staff Roles could only consist of alphabets!');");
-                        error.println("window.open('staffAdd.html', '_self');");
-                        error.println("</script>");
-                        error.println("</body>");
-                        error.println("</html>");
-                    }
-                    break;
-                } else {
-                    errorExist = false;
-                }
-            }
-
-            if (!staffRole.equals("Admin") || !staffRole.equals("Manager") || !staffRole.equals("Staff")) {
+            if (staffRole.equals("")) { //check if role input is empty
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
                     error.println("<!DOCTYPE html>");
                     error.println("<html>");
                     error.println("<body>");
-                    error.println("<script type=\"text/javascript\">alert('Please enter 'Admin', 'Manager', 'Staff' only!);");
+                    error.println("<script type=\"text/javascript\">alert('Staff Role could not be empty!');");
                     error.println("window.open('staffAdd.html', '_self');");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
-                break;
-            } else {
-                errorExist = false;
+            } else if (!staffRole.equals("Admin") && !staffRole.equals("Manager") && !staffRole.equals("Security") && !staffRole.equals("Staff")) { //check for the specific values for role
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Please enter \\'Admin\\', \\'Manager\\', \\'Staff\\', \\'Security\\' only!');");
+                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
             }
+            errorExist = false;
+        } while (errorExist);
+
+        //validate name
+        do {
+            if (staffName.equals("")) { //check if username is empty
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Staff Username could not be empty!');");
+                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            } else if (!staffName.equals(staffId + staffPassword)) { //check if username uses staffid and password combination
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Staff Username is a combination of StaffID and Staff Password!');");
+                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            }
+            errorExist = false;
         } while (errorExist);
 
         //get all correct details
-        String staffId = request.getParameter("staffId");
-        String staffName = request.getParameter("staffName");
-        String staffDOB = request.getParameter("staffDOB");
-        String staffAddress = request.getParameter("addressLine1") + request.getParameter("addressLine2") + request.getParameter("addressLine3");
-        String staffCity = request.getParameter("staffCity");
-        String staffIc = request.getParameter("staffIc");
-        String staffPostcode = request.getParameter("staffPostcode");
-        String staffEmail = request.getParameter("staffEmail");
-        String staffPhone = request.getParameter("staffPhone");
-        String staffPassword = request.getParameter("staffPassword");
-        String staffConfirmPassword = request.getParameter("staffConfirmPassword");
-        String staffRole = request.getParameter("staffRole");
-        //add to database
-        staffDA.addRecord(Integer.parseInt(staffId), staffName, staffDOB, staffAddress, staffCity, staffPostcode, staffIc, staffEmail, staffPhone, staffPassword, staffConfirmPassword, staffRole);
+        if (!errorExist) {
+            //add to database
+            staffDA.addRecord(Integer.parseInt(staffId), staffName, staffDOB, staffAddress, staffCity, staffPostCode, staffIc, staffEmail, staffPhone, staffPassword, staffConfirmPassword, staffRole);
 
-        //print successful message window
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Success!</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<script type=\"text/javascript\">alert('Data added successfully!');");
-            out.println("window.open('staffAdd.html', '_self');");
-            out.println("</script>");
-            out.println("</body>");
-            out.println("</html>");
+            //print successful message window
+            response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Success!</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<script type=\"text/javascript\">alert('Data added successfully!');");
+                out.println("window.open('staffAdd.html', '_self');");
+                out.println("</script>");
+                out.println("</body>");
+                out.println("</html>");
+            }
         }
     }
 
@@ -604,6 +715,7 @@ public class AddStaffDetails extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
+
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
