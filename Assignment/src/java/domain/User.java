@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class User implements Serializable {
 
+    private int custID;
     private String fullName;
     private Date dob;
     private String address;
@@ -21,8 +22,9 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String fullName, Date dob, String address, String email, String phoneNumber,
+    public User(int custID, String fullName, Date dob, String address, String email, String phoneNumber,
             String username, String password, String icNumber, String city, String postcode) {
+        this.custID = custID;
         this.fullName = fullName;
         this.dob = dob;
         this.address = address;
@@ -35,6 +37,14 @@ public class User implements Serializable {
         this.postcode = postcode;
     }
 
+    public int getCustID(){
+        return custID;
+    }
+    
+    public void setCustID(){
+        this.custID = custID;
+    }
+    
     public String getFullName() {
         return fullName;
     }
@@ -118,6 +128,7 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{"
+                + "custID='" + custID + '\''
                 + "fullName='" + fullName + '\''
                 + ", dob=" + dob
                 + ", address='" + address + '\''
