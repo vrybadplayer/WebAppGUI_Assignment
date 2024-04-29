@@ -10,11 +10,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <a href="staffAdd.html">Staff (Add Staff)</a><br/>
-        <a href="StaffHomepage.jsp">Staff (Search Staff)</a><br/>
-        <a href="StaffUpdate.jsp">Staff (Update Staff)</a><br/>
-        <a href="StaffDelete.jsp">Staff (Delete Staff)</a><br/>
+        <a href ="StaffSettingsPages/StaffPages/staffAdd.html">Staff (Staff)</a> <br>
         <a href ="Products.jsp">Products</a> <br>
-        <a href ="ProductList.jsp">Product List</a>
+        <a href ="ProductList.jsp">Product List</a> <br>
+        <a href ="customerregister.jsp">Customer Register</a> <br>
+        <a href ="customerlogin.jsp">Customer Login</a> <br>
+
+        <form id="logoutForm" action="CustomerLogout" method="post">
+            <button type="button" class="btn btn-danger" onclick="confirmLogout()">Logout</button>
+        </form>
+
+        <script>
+            function confirmLogout() {
+                if (confirm("Are you sure you want to logout?")) {
+                    document.getElementById("logoutForm").submit();
+                }
+            }
+        </script>
+
     </body>
 </html>

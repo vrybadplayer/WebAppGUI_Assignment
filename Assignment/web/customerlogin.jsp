@@ -21,24 +21,24 @@
                                             <h4 class="mt-1 mb-5 pb-1">SmartLearn</h4>
                                         </div>
 
-                                        <form action="/action_page.php">
+                                        <form action="CustomerLogin" method="POST">
                                             <p>Please login to your account</p>
                                             <div data-mdb-input-init class="form-outline mb-4">
                                                 <label class="form-label" for="username">Username:</label>
-                                                <input type="username" id="username" class="form-control" placeholder="Username"/>
+                                                <input type="text" id="username" name="username" class="form-control" placeholder="Username"/>
                                             </div>
                                             <div data-mdb-input-init class="form-outline mb-4">
                                                 <label class="form-label" for="password">Password:</label>
-                                                <input type="password" id="password" class="form-control" placeholder="Password"/>
+                                                <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
                                             </div>
                                             <div class="text-center pt-1 mb-5 pb-1">
-                                                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Log
+                                                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
                                                     in</button>
-                                                <a class="text-muted" href="#!">Forgot password?</a>
+                                                <a class="text-muted" href="CustForgotPassword.jsp">Forgot password?</a>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-center pb-4">
                                                 <p class="mb-0 me-2">Don't have an account?&emsp;</p></t>
-                                                <a href= "/JhAssignment/CustomerRegister/customerregister.jsp">
+                                                <a href= "customerregister.jsp">
                                                     <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger">Create new</button>
                                                 </a>
                                             </div>         

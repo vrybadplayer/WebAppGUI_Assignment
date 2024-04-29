@@ -1,7 +1,5 @@
 package Servlets;
 
-import dataAccess.UserDA;
-import domain.User;
 import jakarta.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "CustomerRegister", urlPatterns = {"/CustomerRegister"})
 public class CustomerRegister extends HttpServlet {
-    private int lastCustID = 1000;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -42,9 +40,9 @@ public class CustomerRegister extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         boolean errorExist = false;
-        UserDA userDA = new UserDA();
+
         // Extract form data
         String fullName = request.getParameter("fullName");
         String dobStr = request.getParameter("dob"); // YYYY-MM-DD
@@ -575,27 +573,19 @@ public class CustomerRegister extends HttpServlet {
             }
         } while (errorExist);
 
-        if (!errorExist) { 
-            int nextCustID = lastCustID + 1;
-            lastCustID = nextCustID;
-            User newUser = new User(nextCustID, fullName, dob, address, email, phoneNumber, username, password, icNumber, city, postcode);
-            userDA.addUser(newUser);
+        if (!errorExist) {
+            request.setAttribute("fullName", fullName);
+            request.setAttribute("dob", dobStr);
+            request.setAttribute("address", address);
+            request.setAttribute("email", email);
+            request.setAttribute("phoneNumber", phoneNumber);
+            request.setAttribute("username", username);
+            request.setAttribute("password", password);
+            request.setAttribute("icNumber", icNumber);
+            request.setAttribute("city", city);
+            request.setAttribute("postcode", postcode);
+            request.getRequestDispatcher("/confirmationcustreg.jsp").forward(request, response);
 
-            //print successful message window
-            response.setContentType("text/html;charset=UTF-8");
-            try (PrintWriter out = response.getWriter()) {
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Register successfully!</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<script type=\"text/javascript\">alert('Registered successfully!');");
-                out.println("window.history.back('customerregister.jsp', '_self');");
-                out.println("</script>");
-                out.println("</body>");
-                out.println("</html>");
-            }
         }
     }
 

@@ -16,4 +16,65 @@
         <servlet-name>ProductsServlet</servlet-name>
         <url-pattern>/ProductsServlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CustomerRegister</servlet-name>
+        <servlet-class>Servlets.CustomerRegister</servlet-class>
+    </servlet>
+         
+    <servlet-mapping>
+        <servlet-name>CustomerRegister</servlet-name>
+        <url-pattern>/CustomerRegister</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CustomerConfirmation</servlet-name>
+        <servlet-class>Servlets.CustomerConfirmation</servlet-class>
+    </servlet>
+         
+    <servlet-mapping>
+        <servlet-name>CustomerConfirmation</servlet-name>
+        <url-pattern>/CustomerConfirmation</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CustomerLogin</servlet-name>
+        <servlet-class>Servlets.CustomerLogin</servlet-class>
+    </servlet>
+         
+    <servlet-mapping>
+        <servlet-name>CustomerLogin</servlet-name>
+        <url-pattern>/CustomerLogin</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CustForgotPassword</servlet-name>
+        <servlet-class>Servlets.CustForgotPassword</servlet-class>
+    </servlet>
+         
+    <servlet-mapping>
+        <servlet-name>CustForgotPassword</servlet-name>
+        <url-pattern>/CustForgotPassword</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CustResetPassword</servlet-name>
+        <servlet-class>Servlets.CustResetPassword</servlet-class>
+    </servlet>
+         
+    <servlet-mapping>
+        <servlet-name>CustResetPassword</servlet-name>
+        <url-pattern>/CustResetPassword</url-pattern>
+    </servlet-mapping>
+    
+        <servlet>
+        <servlet-name>CustomerLogout</servlet-name>
+        <servlet-class>Servlets.CustomerLogout</servlet-class>
+    </servlet>
+         
+    <servlet-mapping>
+        <servlet-name>CustomerLogout</servlet-name>
+        <url-pattern>/CustomerLogout</url-pattern>
+    </servlet-mapping>
+
 </web-app>
