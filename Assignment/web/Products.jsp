@@ -25,8 +25,8 @@
             int picNo = Integer.parseInt(request.getParameter("picNo"));
             String category = request.getParameter("category");
             Product prod = Product.SearchProduct(prodId);
-            Customer cust = Customer.SearchCustomer(1000); //Needs to be changed
-        %>
+            String custID = (String) session.getAttribute("custID");
+%>
 
         <div class="main-container">
             <span class="course-title"><%= prod.getName()%></span>
@@ -66,17 +66,12 @@
                         <span class="price">RM <%= prod.getPrice()%></span>
                     </div>
 
-                    <!-- 
-                    In the button, initialize/get the cust and prod id's which is to be passed to Servlet 
-                    This is to be changed later by using request.getParameter();
-                    -->
-
                     <div class="button">
                         <form method="post" action="ProductsServlet">
                             <input type="hidden" name="prodId" value="<%= prod.getId()%>">
-                            <input type="hidden" name="custId" value="<%= cust.getCustID()%>">
-                            <input type="hidden" name="picNo" value="<%= picNo %>">
-                            <input type="hidden" name="category" value="<%= category %>">
+                            <input type="hidden" name="custId" value="<%= custID%>">
+                            <input type="hidden" name="picNo" value="<%= picNo%>">
+                            <input type="hidden" name="category" value="<%= category%>">
                             <button class="add-to-cart" type="submit">Add To Cart</button>
                         </form>
                     </div>
@@ -137,7 +132,7 @@
                 <div class="button-8">
                     <form method="post" action="ProductsServlet">
                         <input type="hidden" name="prodId" value="<%= prod.getId()%>">
-                        <input type="hidden" name="custId" value="<%= cust.getCustID()%>">
+                        <input type="hidden" name="custId" value="<%= custID%>">
                         <input type="hidden" name="picNo" value="<%= picNo%>">
                         <input type="hidden" name="category" value="<%= category%>">
                         <button class="join-course-now">Join Course Now</button>

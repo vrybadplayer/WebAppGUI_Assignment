@@ -55,6 +55,24 @@ public class CartOrders {
         return date;
     }
 
+    public void setHKPK(int HKPK) {
+        this.HKPK = HKPK;
+    }
+
+    public void setCustId(int custId) {
+        this.custId = custId;
+    }
+
+    public void setProdId(int prodId) {
+        this.prodId = prodId;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    
+    
     //Need to use UTX instead of JDBC
     public static void AddToCart(int hkpk, int cust, int prod, String date) {
         //Connection

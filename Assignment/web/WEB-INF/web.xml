@@ -21,16 +21,12 @@
         <servlet-name>CustomerRegister</servlet-name>
         <servlet-class>Servlets.CustomerRegister</servlet-class>
     </servlet>
-<<<<<<< Updated upstream
-         
-=======
->>>>>>> Stashed changes
+    
     <servlet-mapping>
         <servlet-name>CustomerRegister</servlet-name>
         <url-pattern>/CustomerRegister</url-pattern>
     </servlet-mapping>
     
-<<<<<<< Updated upstream
     <servlet>
         <servlet-name>CustomerConfirmation</servlet-name>
         <servlet-class>Servlets.CustomerConfirmation</servlet-class>
@@ -81,6 +77,4 @@
         <url-pattern>/CustomerLogout</url-pattern>
     </servlet-mapping>
 
-=======
->>>>>>> Stashed changes
 </web-app>

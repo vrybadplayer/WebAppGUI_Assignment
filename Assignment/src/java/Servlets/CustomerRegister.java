@@ -1,13 +1,9 @@
 package Servlets;
 
-<<<<<<< Updated upstream
 import jakarta.servlet.annotation.WebServlet;
-=======
 import dataAccess.UserDA;
 import domain.User;
->>>>>>> Stashed changes
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+
 
 @WebServlet(name = "CustomerRegister", urlPatterns = {"/CustomerRegister"})
 public class CustomerRegister extends HttpServlet {

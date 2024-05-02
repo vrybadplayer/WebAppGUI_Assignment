@@ -39,11 +39,10 @@
     <body>    
 
         <%
-            //This needs to be changed to JavaBeans
             int prodId = Integer.parseInt(request.getParameter("prodId"));
-            Customer cust = Customer.SearchCustomer(1000);//Needs to be changed
             int picNo = Integer.parseInt(request.getParameter("picNo"));
             String category = request.getParameter("category");
+            String custID = (String) session.getAttribute("custID");
             Product prod = Product.SearchProduct(prodId);
         %>
 
@@ -101,7 +100,7 @@
                     <div class="button">
                         <form method="post" action="ProductsServlet">
                             <input type="hidden" name="prodId" value="<%= prod.getId()%>">
-                            <input type="hidden" name="custId" value="<%= cust.getCustID()%>">
+                            <input type="hidden" name="custId" value="<%= custID%>">
                             <input type="hidden" name="picNo" value="<%= picNo%>">
                             <input type="hidden" name="category" value="<%= category%>">
                             <button class="add-to-cart" type="submit">Add To Cart</button>
@@ -166,7 +165,7 @@
                 <div class="button-8">
                     <form method="post" action="ProductsServlet">
                         <input type="hidden" name="prodId" value="<%= prod.getId()%>">
-                        <input type="hidden" name="custId" value="<%= cust.getCustID()%>">
+                        <input type="hidden" name="custId" value="<%= custID%>">
                         <input type="hidden" name="picNo" value="<%= picNo%>">
                         <input type="hidden" name="category" value="<%= category%>">
                         <button class="join-course-now" onclick="togglePopup()">Join Course Now</button>
