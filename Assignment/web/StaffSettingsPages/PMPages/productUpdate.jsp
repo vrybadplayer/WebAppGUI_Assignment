@@ -1,3 +1,4 @@
+<%@page import="domain.Product"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,9 +34,9 @@
                     <img src ="../StaffPages/images/homeIcon.jpg" alt = "homeIcon" style = "width:28px; height:28px">
                     <a href = "productManage.html" style="flex: 1 1 0; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word; text-decoration: none;">Home</a>
                 </div>
-                <div style="align-self: stretch; height: 40px; padding-left: 16px; padding-right: 16px; background: #B589D6; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
+                <div style="align-self: stretch; height: 40px; padding-left: 16px; padding-right: 16px; background: white; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
                     <img src = "images/listing.png" alt = "recruitStaff" style = "width:28px; height:28px">
-                    <div style="flex: 1 1 0; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word; text-decoration: none">Listing</div>
+                    <a href = "productAdd.html" style="flex: 1 1 0; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word; text-decoration: none">Listing</a>
                 </div>
                 <div style="align-self: stretch; height: 40px; padding-left: 16px; padding-right: 16px; background: white; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
                     <img src = "images/delist.png" alt = "deactivate" style = "width:28px; height:28px">
@@ -43,25 +44,32 @@
                 </div>
             </div>
             <div style="left: 24px; top: 24px; position: absolute; color: black; font-size: 20px; font-family: Ubuntu, sans-serif; font-weight: 600; line-height: 30px; word-wrap: break-word">Tasks</div>
-            <div style="width: 208px; height: 40px; padding-left: 16px; padding-right: 16px; left: 8px; top: 250px; position: absolute; background: white; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
+            <div style="width: 208px; height: 40px; padding-left: 16px; padding-right: 16px; left: 8px; top: 250px; position: absolute; background: #B589D6; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 16px; display: inline-flex">
                 <img src = "images/update.png" alt = "updateDetails" style = "width:28px; height:28px">
-                <a href = "productUpdate.html" style="flex: 1 1 0; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word; text-decoration:none">Update Courses</a>
+                <div style="flex: 1 1 0; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word; text-decoration:none">Update Course</div>
             </div>
         </div>
 
         <!--Listing Title-->
         <div style="width: 516px; height: 44px"></div>
-        <div style="width: 516px; color: black; font-size: 40px; font-family: Ubuntu, sans-serif; font-weight: 600; line-height: 44px; word-wrap: break-word; margin-left: 765px; font-family: Ubuntu, sans-serif">Listing Courses</div>
+        <div style="width: 516px; color: black; font-size: 40px; font-family: Ubuntu, sans-serif; font-weight: 600; line-height: 44px; word-wrap: break-word; margin-left: 765px; font-family: Ubuntu, sans-serif">Update Course</div>
+
+
+        <%
+            int ProdID = Integer.parseInt(request.getParameter("ProdID"));
+            Product prod = Product.SearchProduct(ProdID);
+        %>
 
         <!--Listing Form ADD FORM HERE -->
-        <form method ="POST" action="AddNewProducts">
+        <form method ="POST" action="UpdateProduct">
+            <input type="hidden" name="ProdID" value="<%= prod.getId()%>">
             <div style="width: 995px; height: 783px; position: relative; background: rgba(106, 53, 156, 0.70); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 79px; overflow: hidden; border: 1px rgba(106, 53, 156, 0.70) solid; margin-left: 440px; padding-top:18px; padding-left: 12px">
                 <div style = "margin-bottom: 23px">
                     <div style="width: 73px; height: 24px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: inline-flex">
                     </div>
                 </div>
-               <!--course name-->
-                <input type="text" name="CourseName" style="width: 342px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 137px; top: 89px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
+                <!--course name-->
+                <input type="text" value="<% prod.getName(); %>" name="CourseName" style="width: 342px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 137px; top: 89px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
                 <!--<div style="height: 31px; left: 118px; top: 213px; position: absolute"></div>-->
 
                 <div style = "margin-top:71px; display:inline-flex; flex-direction: column; margin-left: 32px">
@@ -88,7 +96,7 @@
                     </div>
                 </div>
                 <!--description-->
-                <input type="text" name="Synopsis" style="width: 447px; height: 200px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 32px; top: 181px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid;margin-bottom:5px">
+                <input type="text" value="<% prod.getSynopsis(); %>" name="Synopsis" style="width: 447px; height: 200px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 32px; top: 181px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid;margin-bottom:5px">
 
                 <!--Skills Gained-->
                 <div style = "margin-top: 76px; margin-left: 23px">
@@ -103,10 +111,10 @@
                     </div>
                 </div>
                 <!--Organizer Input-->
-                <input type="text" name="Organizer" style="width: 310px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 538px; top: 263px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
+                <input type="text" value="<% prod.getOrganizer(); %>" name="Organizer" style="width: 310px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 538px; top: 263px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
 
                 <!-- Skills Gained Input -->
-                <input type="text" name="SkillsGained" style="width: 447px; height: 50px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 31px; top: 424px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid;margin-top:23px">
+                <input type="text" value="<% prod.getSkills(); %>" name="SkillsGained" style="width: 447px; height: 50px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 31px; top: 424px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid;margin-top:23px">
 
                 <!--Course Modules-->
                 <div style = "margin-top: 123px; margin-left:23px">
@@ -114,30 +122,30 @@
                         <div style="width: 238px; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word">Course Modules<br/>(?, ?, ?, .....)</div>
                     </div>
                 </div>
-                <input type="text" name="Modules" style="width: 447px; height: 100px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 31px; top: 564px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid;margin-top: 33px">
+                <input type="text" value="<% prod.getModules(); %>" name="Modules" style="width: 447px; height: 100px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 31px; top: 564px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid;margin-top: 33px">
 
                 <!--Category input-->
-                <input type="text" name="Category" style="width: 202px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 618px; top: 88px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
+                <input type="text" value="<% prod.getCategory(); %>" name="Category" style="width: 202px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 618px; top: 88px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
 
                 <!--Experience Level-->
-                <input type="text" name="ExperienceLevel" style="width: 197px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 538px; top: 181px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
+                <input type="text" value="<% prod.getLevel(); %>" name="ExperienceLevel" style="width: 197px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 538px; top: 181px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
 
                 <!--Contributor-->
-                <input type="text" name="Contributor" style="width: 310px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 538px; top: 348px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
+                <input type="text" value="<% prod.getContributor(); %>" name="Contributor" style="width: 310px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 538px; top: 348px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
 
                 <!--Objective-->
-                <input type="text" name="Objective" style="width: 310px; height: 50px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 538px; top: 427px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
+                <input type="text" value="<% prod.getObjective(); %>" name="Objective" style="width: 310px; height: 50px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 538px; top: 427px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
                 <div style="left: 523px; top: 29px; position: absolute"></div>
                 <div style="width: 154px; left: 430px; top: 29px; position: absolute; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word">Duration (Weeks): </div>
                 <!--Duration Input-->
-                <input type="text" name="Duration" style="width: 221px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 569px; top: 26px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
+                <input type="text" value="<% prod.getDuration(); %>" name="Duration" style="width: 221px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 569px; top: 26px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
                 <div style="width: 120px; left: 19px; top: 93px; position: absolute; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word">Course Name:</div>
                 <div style="left: 533px; top: 93px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: inline-flex">
                     <div style="width: 88px; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word">Category:</div>
                 </div>
 
                 <button type="submit" style="margin-top: 80px; margin-left: 780px; width: 86px; height: 40px; padding-left: 16px; padding-right: 16px; background: rgba(106, 53, 156, 0.70); border-radius: 8px; justify-content: center; align-items: center; gap: 8px; display: inline-flex; font-family: Ubuntu, sans-serif;">Submit</button>
-                
+
             </div>
             <div style="width: 120px; height: 24px"></div>
 
