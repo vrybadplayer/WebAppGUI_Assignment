@@ -40,9 +40,13 @@
 
         <%
             //This needs to be changed to JavaBeans
-            Product prod = Product.SearchProduct(1000);
-            Customer cust = Customer.SearchCustomer(1000);
+            int prodId = Integer.parseInt(request.getParameter("prodId"));
+            Customer cust = Customer.SearchCustomer(1000);//Needs to be changed
+            int picNo = Integer.parseInt(request.getParameter("picNo"));
+            String category = request.getParameter("category");
+            Product prod = Product.SearchProduct(prodId);
         %>
+
 
         <div class="popup" id="popup-1">
             <div class="overlay">
@@ -95,8 +99,12 @@
                     <!-- In the button, initialize/get the cust and prod id's which is to be passed to Servlet -->
 
                     <div class="button">
-                        <form>
-                            <button class="add-to-cart" type="submit" onclick="togglePopup()">Add To Cart</button>
+                        <form method="post" action="ProductsServlet">
+                            <input type="hidden" name="prodId" value="<%= prod.getId()%>">
+                            <input type="hidden" name="custId" value="<%= cust.getCustID()%>">
+                            <input type="hidden" name="picNo" value="<%= picNo%>">
+                            <input type="hidden" name="category" value="<%= category%>">
+                            <button class="add-to-cart" type="submit">Add To Cart</button>
                         </form>
                     </div>
 
@@ -130,7 +138,11 @@
                     %>
 
                 </div>
-                <div class="course-image"></div>
+                <%
+                    out.println("<div class=\"course-image\">");
+                    out.println("<img src=\"./assets/courseImages/" + category + picNo + ".jpg\" alt=\"Product Image\">");
+                    out.println("</div>");
+                %>
             </div>
             <div class="background"></div>
             <div class="flex-row-abc">
@@ -152,7 +164,11 @@
                 </span>
 
                 <div class="button-8">
-                    <form>
+                    <form method="post" action="ProductsServlet">
+                        <input type="hidden" name="prodId" value="<%= prod.getId()%>">
+                        <input type="hidden" name="custId" value="<%= cust.getCustID()%>">
+                        <input type="hidden" name="picNo" value="<%= picNo%>">
+                        <input type="hidden" name="category" value="<%= category%>">
                         <button class="join-course-now" onclick="togglePopup()">Join Course Now</button>
                     </form>
                 </div>

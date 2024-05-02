@@ -1,6 +1,11 @@
 package Servlets;
 
+<<<<<<< Updated upstream
 import jakarta.servlet.annotation.WebServlet;
+=======
+import dataAccess.UserDA;
+import domain.User;
+>>>>>>> Stashed changes
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;

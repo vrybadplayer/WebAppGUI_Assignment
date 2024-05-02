@@ -22,6 +22,8 @@
 
         <%
             int prodId = Integer.parseInt(request.getParameter("productId"));
+            int picNo = Integer.parseInt(request.getParameter("picNo"));
+            String category = request.getParameter("category");
             Product prod = Product.SearchProduct(prodId);
             Customer cust = Customer.SearchCustomer(1000); //Needs to be changed
         %>
@@ -73,6 +75,8 @@
                         <form method="post" action="ProductsServlet">
                             <input type="hidden" name="prodId" value="<%= prod.getId()%>">
                             <input type="hidden" name="custId" value="<%= cust.getCustID()%>">
+                            <input type="hidden" name="picNo" value="<%= picNo %>">
+                            <input type="hidden" name="category" value="<%= category %>">
                             <button class="add-to-cart" type="submit">Add To Cart</button>
                         </form>
                     </div>
@@ -103,7 +107,13 @@
                     %>
 
                 </div>
-                <div class="course-image"></div>
+
+                <%
+                    out.println("<div class=\"course-image\">");
+                    out.println("<img src=\"./assets/courseImages/" + category + picNo + ".jpg\" alt=\"Product Image\">");
+                    out.println("</div>");
+                %>
+
             </div>
             <div class="background"></div>
             <div class="flex-row-abc">
@@ -128,6 +138,8 @@
                     <form method="post" action="ProductsServlet">
                         <input type="hidden" name="prodId" value="<%= prod.getId()%>">
                         <input type="hidden" name="custId" value="<%= cust.getCustID()%>">
+                        <input type="hidden" name="picNo" value="<%= picNo%>">
+                        <input type="hidden" name="category" value="<%= category%>">
                         <button class="join-course-now">Join Course Now</button>
                     </form>
                 </div>

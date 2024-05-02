@@ -76,12 +76,13 @@ public class ProductsServlet extends HttpServlet {
         int CustID = Integer.parseInt(request.getParameter("custId"));
         int ProdID = Integer.parseInt(request.getParameter("prodId"));
         
+        
         //Think of a way to auto increment the HKPK
         CartOrders.AddToCart(CartOrders.NextHKPK(), CustID, ProdID, "2004-01-09");
         
         //redirect back to jsp
         //Also think of a way to pop-up display that customer added to cart
-        response.sendRedirect("Products2.jsp");
+        response.sendRedirect("Products2.jsp?picNo="+Integer.parseInt(request.getParameter("picNo"))+"&category="+request.getParameter("category")+"&prodId="+ProdID);
     }
 
     /**
