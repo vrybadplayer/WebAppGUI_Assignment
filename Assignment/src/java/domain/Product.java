@@ -119,6 +119,24 @@ public class Product {
         return reviews;
     }
 
+    public static void deleteRecord(int prodID) {
+
+        //Connection
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            String sql = "DELETE FROM " + tableName + " WHERE ProdID = ?";
+
+            //Prepare SQL Statement
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, prodID);
+
+                stmt.executeQuery();
+
+            }
+        } catch (SQLException ex) {
+
+        }
+    }
+
     //Return the ID of the last Product
     public static int NextProductID() {
 
@@ -208,6 +226,48 @@ public class Product {
             //Prepare SQL Statement
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, category);
+
+                //Get ResultSet
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        Product product = new Product(
+                                rs.getInt("ProdID"),
+                                rs.getString("CourseName"),
+                                rs.getDouble("Price"),
+                                rs.getString("Synopsis"),
+                                rs.getInt("Duration"),
+                                rs.getString("Experience_Level"),
+                                rs.getString("Organizer"),
+                                rs.getString("Contributor"),
+                                rs.getString("Skills_Gained"),
+                                rs.getString("Modules"),
+                                rs.getString("Objective"),
+                                rs.getString("Category"),
+                                rs.getDouble("Rating"),
+                                rs.getInt("Reviews")
+                        );
+
+                        productList.add(product);
+                    }
+                }
+            }
+
+            return productList;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Handle the exception properly in your application
+        }
+        return null;
+    }
+
+    public static ArrayList<Product> SearchAll() {
+        ArrayList<Product> productList = new ArrayList<>();
+        //Connection
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            String sql = "SELECT * FROM " + tableName;
+
+            //Prepare SQL Statement
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 
                 //Get ResultSet
                 try (ResultSet rs = stmt.executeQuery()) {

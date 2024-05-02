@@ -56,8 +56,8 @@
 
 
         <%
-            int ProdID = Integer.parseInt(request.getParameter("ProdID"));
-            Product prod = Product.SearchProduct(ProdID);
+            //int ProdID = Integer.parseInt(request.getParameter("ProdID"));
+            Product prod = Product.SearchProduct(1000);
         %>
 
         <!--Listing Form ADD FORM HERE -->
