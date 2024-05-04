@@ -34,7 +34,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     ),
     @NamedQuery(name = "ProductModel.insertProduct", query = "INSERT INTO Product VALUES "
             + "(:prodId, :courseName, :synopsis, :price, :duration, :experienceLevel, :organizer, :contributor, :skillsGained, :modules, :objective, :category, :rating, :reviews)"
-    )})
+    ),
+    @NamedQuery(name = "ProductModel.deleteProduct", query = "DELETE FROM Product p WHERE p.prodId = :prodId")
+})
 
 public class ProductModel implements Serializable {
 

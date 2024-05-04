@@ -1,7 +1,7 @@
-Thu May 02 21:23:45 MYT 2024 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
+Sat May 04 10:46:05 MYT 2024 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Thu May 02 21:24:20 MYT 2024:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-018f-3979-a7a3-000016a9e0e3 
+Sat May 04 10:46:26 MYT 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-018f-417e-93f3-000016a9e0e3 
 on database directory C:\Users\ASUS\Documents\NetBeansProjects\WebAppGUI_Assignment\SmartLearnDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/ASUS/glassfish4/javadb/lib/derby.jar
 java.vendor=Oracle Corporation

@@ -162,8 +162,8 @@
                     for (Product product : prodList) {
                 %>
                 <div style="align-self: stretch; height: 56px; border-top: 1px #E0E0E0 solid; justify-content: flex-start; align-items: center; gap: 67px; display: inline-flex">
-                    <form action="productDelete.jsp">
-                        <button name="searchid" value="<%= product.getId()%>" style="width: 60px; color: #828282; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word"><%= product.getId()%></button>
+                    <form method="POST" action="DeleteProduct">
+                        <button name="ProdID" value="<%= product.getId()%>" style="width: 60px; color: #828282; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word"><%= product.getId()%></button>
                     </form>
                     <div style="position: relative; top:-15px;padding-right:421px">
                         <div style="width: 412px; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word; position:absolute"><%= product.getName()%></div>

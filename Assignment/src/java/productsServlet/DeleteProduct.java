@@ -7,10 +7,13 @@ package productsServlet;
 import domain.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.UserTransaction;
 
 /**
  *
@@ -75,7 +78,54 @@ public class DeleteProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        EntityManager em = (EntityManager) request.getAttribute("javax.persistence.EntityManager");
+
+        UserTransaction utx = (UserTransaction) request.getAttribute("javax.transaction.UserTransaction");
+
+        EntityTransaction transaction = null;
+        
+        try {
+            utx.begin();
+            transaction = em.getTransaction();
+
+            javax.persistence.Query query = em.createNamedQuery("ProductModel.deleteProduct");
+
+            query.setParameter("prodId", Integer.parseInt(request.getParameter("ProdID")));
+            
+            //Update
+            query.executeUpdate();
+
+            transaction.commit();
+
+            try (PrintWriter error = response.getWriter()) {
+                error.println("<!DOCTYPE html>");
+                error.println("<html>");
+                error.println("<body>");
+                error.println("<script type=\"text/javascript\">alert('Product Deleted Successfully!');");
+                error.println("window.open('productDelete.jsp', '_self');");
+                error.println("</script>");
+                error.println("</body>");
+                error.println("</html>");
+            }
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            try (PrintWriter error = response.getWriter()) {
+                error.println("<!DOCTYPE html>");
+                error.println("<html>");
+                error.println("<body>");
+                error.println("<script type=\"text/javascript\">alert('Error Occured!');");
+                error.println("window.open('productDelete.jsp', '_self');");
+                error.println("</script>");
+                error.println("</body>");
+                error.println("</html>");
+            }
+        } finally {
+            response.sendRedirect("productDelete.jsp");
+        }
     }
 
     /**
