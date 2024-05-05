@@ -5,8 +5,6 @@
 package model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,7 +53,7 @@ public class Staff implements Serializable {
     @Column(name = "STAFFNAME")
     private String staffname;
     @Column(name = "STAFFDOB")
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     private String staffdob;
     @Size(max = 255)
     @Column(name = "STAFFADDRESS")

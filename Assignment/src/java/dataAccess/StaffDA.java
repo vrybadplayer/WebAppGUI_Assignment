@@ -4,14 +4,10 @@
  */
 package dataAccess;
 
-import com.sun.xml.ws.xmlfilter.Invocation;
-import java.io.PrintWriter;
-import model.Staff;
+import domain.Staff;
 import java.sql.*;
 import java.util.ArrayList;
-import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
-//import sun.security.rsa.RSACore;
 
 /**
  *
@@ -150,4 +146,64 @@ public class StaffDA {
         return staff;
     }
     
+    public String getUsernamePassword(int staffId){
+        String credentials = null;
+        try{
+            stmt = conn.prepareStatement("SELECT StaffName, StaffPassword FROM " + tableName + " WHERE StaffID = ?");
+            stmt.setString(1, Integer.toString(staffId));
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                credentials = rs.getString("StaffName") + rs.getString("StaffPassword");
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return credentials;
+    }
+    
+    public void updateCredentials (int id, String username, String password){
+        try{
+            stmt = conn.prepareStatement("UPDATE " + tableName + " SET StaffName = ?, StaffPassword = ?, StaffConfirmPassword = ? WHERE StaffID = ?");
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            stmt.setString(3, password);
+            stmt.setString(4, Integer.toString(id));
+            stmt.executeUpdate();
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    //check for duplicate records (unique keys)
+    public boolean checkExistingIC(String ic){
+        try{
+            stmt = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE StaffIC = ?");
+            stmt.setString(1, ic);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                if(rs.getString("StaffIC").equals(ic)){
+                    return true;
+                }
+            }
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean checkExistingEmail(String email){
+        try{
+           stmt = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE StaffEmail = ?");
+           stmt.setString(1, email);
+           ResultSet rs = stmt.executeQuery();
+           while (rs.next()){
+               if(rs.getString("StaffEmail").equals(email)){
+                   return true;
+               }
+           }
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }

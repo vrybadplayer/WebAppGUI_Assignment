@@ -44,7 +44,7 @@ public class DeleteStaffRecords extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<script type=\"text/javascript\">alert('Staff record deleted successfully');");
-            out.println("window.open('StaffDelete.jsp', '_self');");
+            out.println("window.open('manager/StaffDelete.jsp', '_self');");
             out.println("</script>");
             out.println("</body>");
             out.println("</html>");

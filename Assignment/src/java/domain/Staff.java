@@ -40,7 +40,7 @@ public class Staff {
         this.Role = Role;
     }
 
-    public int getStaffID() {
+    public int getStaffid() {
         return StaffID;
     }
 
@@ -48,7 +48,7 @@ public class Staff {
         this.StaffID = StaffID;
     }
 
-    public String getStaffName() {
+    public String getStaffname() {
         return StaffName;
     }
 
@@ -56,7 +56,7 @@ public class Staff {
         this.StaffName = StaffName;
     }
 
-    public String getStaffDOB() {
+    public String getStaffdob() {
         return StaffDOB;
     }
 
@@ -64,7 +64,7 @@ public class Staff {
         this.StaffDOB = StaffDOB;
     }
 
-    public String getStaffAddress() {
+    public String getStaffaddress() {
         return StaffAddress;
     }
 
@@ -72,15 +72,15 @@ public class Staff {
         this.StaffAddress = StaffAddress;
     }
 
-    public String getStaffCity() {
+    public String getStaffcity() {
         return StaffCity;
     }
 
-    public void setStaffCity(String StaffCity) {
+    public void setStaffcity(String StaffCity) {
         this.StaffCity = StaffCity;
     }
 
-    public String getStaffPostcode() {
+    public String getStaffpostcode() {
         return StaffPostcode;
     }
 
@@ -88,7 +88,7 @@ public class Staff {
         this.StaffPostcode = StaffPostcode;
     }
 
-    public String getStaffIC() {
+    public String getStaffic() {
         return StaffIC;
     }
 
@@ -96,7 +96,7 @@ public class Staff {
         this.StaffIC = StaffIC;
     }
 
-    public String getStaffEmail() {
+    public String getStaffemail() {
         return StaffEmail;
     }
 
@@ -104,7 +104,7 @@ public class Staff {
         this.StaffEmail = StaffEmail;
     }
 
-    public String getStaffPhoneNumber() {
+    public String getStaffphonenumber() {
         return StaffPhoneNumber;
     }
 
@@ -112,7 +112,7 @@ public class Staff {
         this.StaffPhoneNumber = StaffPhoneNumber;
     }
 
-    public String getStaffPassword() {
+    public String getStaffpassword() {
         return StaffPassword;
     }
 
@@ -120,7 +120,7 @@ public class Staff {
         this.StaffPassword = StaffPassword;
     }
 
-    public String getStaffConfirmPassword() {
+    public String getStaffconfirmpassword() {
         return StaffConfirmPassword;
     }
 

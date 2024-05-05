@@ -1,6 +1,6 @@
 package Servlets;
 
-import jakarta.servlet.annotation.WebServlet;
+import javax.servlet.annotation.WebServlet;
 import dataAccess.UserDA;
 import domain.User;
 import java.io.IOException;
@@ -587,6 +587,7 @@ public class CustomerRegister extends HttpServlet {
             request.setAttribute("icNumber", icNumber);
             request.setAttribute("city", city);
             request.setAttribute("postcode", postcode);
+            //response.sendRedirect("confirmationcustreg.jsp");
             request.getRequestDispatcher("/confirmationcustreg.jsp").forward(request, response);
 
         }

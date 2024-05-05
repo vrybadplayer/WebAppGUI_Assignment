@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 public class UserDA {
 
-    private String host = "jdbc:derby://localhost:1527/SmartLearn";
+    private String host = "jdbc:derby://localhost:1527/SmartLearnDB";
     private String user = "nbuser";
     private String password = "nbuser";
     private String tableName = "Customer";

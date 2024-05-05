@@ -67,36 +67,33 @@ public class UpdateProduct extends HttpServlet {
         ArrayList<Product> prodList = new ArrayList<>();
         prodList = Product.SearchAll();
 
-        for (int i = 0; i < prodList.size(); ++i) {
-            if (Integer.parseInt(request.getParameter("ProdID")) == prodList.get(i).getId()) {
-                response.sendRedirect("productUpdate.jsp?ProdID=" + Integer.parseInt(request.getParameter("ProdID")));
-            }
-        }
-        try (PrintWriter error = response.getWriter()) {
-            error.println("<!DOCTYPE html>");
-            error.println("<html>");
-            error.println("<body>");
-            error.println("<script type=\"text/javascript\">alert('Product ID does not exist!');");
-            error.println("window.open('productAdd.html', '_self');");
-            error.println("</script>");
-            error.println("</body>");
-            error.println("</html>");
-        } catch (Exception e) {
-            e.printStackTrace();
-            try (PrintWriter error = response.getWriter()) {
+        //System.out.println(Integer.parseInt(request.getParameter("ProdID")));
+        try {
+            if (Product.SearchProduct(Integer.parseInt(request.getParameter("ProdID"))) != null) {
+                response.sendRedirect("staff/product/productUpdate.jsp?ProdID=" + Integer.parseInt(request.getParameter("ProdID")));
+            } else {
+                PrintWriter error = response.getWriter();
                 error.println("<!DOCTYPE html>");
                 error.println("<html>");
                 error.println("<body>");
-                error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                error.println("window.open('productAdd.html', '_self');");
+                error.println("<script type=\"text/javascript\">alert('Product ID does not exist');");
+                error.println("window.history.back();");
                 error.println("</script>");
                 error.println("</body>");
                 error.println("</html>");
             }
-        } finally {
-            response.sendRedirect("productAdd.html");
-        }
 
+        } catch (NumberFormatException ex) {
+            PrintWriter error = response.getWriter();
+            error.println("<!DOCTYPE html>");
+            error.println("<html>");
+            error.println("<body>");
+            error.println("<script type=\"text/javascript\">alert('Invalid Product ID Format!');");
+            error.println("window.history.back();");
+            error.println("</script>");
+            error.println("</body>");
+            error.println("</html>");
+        }
     }
 
     /**
@@ -148,7 +145,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Course Name cannot be empty!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -164,7 +161,7 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                        error.println("window.open('productAdd.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -182,7 +179,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Synopsis cannot be empty!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -198,7 +195,7 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                        error.println("window.open('productUpdate.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -216,7 +213,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Price cannot be empty!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -233,7 +230,7 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Price can only contain numbers!');");
-                        error.println("window.open('productUpdate.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -246,7 +243,7 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                        error.println("window.open('productUpdate.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -264,7 +261,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Duration cannot be empty!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -277,7 +274,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Duration is too long!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                           error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -294,7 +291,7 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Price can only contain numbers!');");
-                        error.println("window.open('productUpdate.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -307,7 +304,7 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                        error.println("window.open('productUpdate.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -325,7 +322,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Experience Level cannot be empty!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -338,7 +335,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Experience Level text is too long!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -355,7 +352,7 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                        error.println("window.open('productUpdate.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -373,7 +370,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Organizer cannot be empty!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -386,7 +383,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Organizer name is too long!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -403,7 +400,7 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                        error.println("window.open('productUpdate.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -421,7 +418,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Contributor cannot be empty!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                           error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -434,7 +431,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Contributor name is too long!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                           error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -451,7 +448,7 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                        error.println("window.open('productUpdate.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -469,7 +466,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Skills Gained cannot be empty!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -482,7 +479,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Too many skills gained!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -499,7 +496,7 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                        error.println("window.open('productUpdate.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -517,7 +514,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Modules cannot be empty!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -530,7 +527,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Too many skills gained!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -547,7 +544,7 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                        error.println("window.open('productUpdate.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -565,7 +562,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Objective cannot be empty!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -578,7 +575,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Objective too long!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -595,7 +592,7 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                        error.println("window.open('productUpdate.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -614,7 +611,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Category cannot be empty!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -627,7 +624,7 @@ public class UpdateProduct extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Category too long!');");
-                            error.println("window.open('productUpdate.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -647,7 +644,7 @@ public class UpdateProduct extends HttpServlet {
                                 error.println("<html>");
                                 error.println("<body>");
                                 error.println("<script type=\"text/javascript\">alert('Category must be either Business, Design, Accounting, Information Technology or Language!');");
-                                error.println("window.open('productUpdate.html', '_self');");
+                                error.println("window.history.back();");
                                 error.println("</script>");
                                 error.println("</body>");
                                 error.println("</html>");
@@ -662,14 +659,13 @@ public class UpdateProduct extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                        error.println("window.open('productUpdate.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
                 }
             } while (errorExist);
-            
 
             //Update
             query.executeUpdate();
@@ -681,7 +677,7 @@ public class UpdateProduct extends HttpServlet {
                 error.println("<html>");
                 error.println("<body>");
                 error.println("<script type=\"text/javascript\">alert('Product Updated Successfully!');");
-                error.println("window.open('productAdd.html', '_self');");
+                error.println("window.history.back();");
                 error.println("</script>");
                 error.println("</body>");
                 error.println("</html>");
@@ -696,14 +692,15 @@ public class UpdateProduct extends HttpServlet {
                 error.println("<html>");
                 error.println("<body>");
                 error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                error.println("window.open('productAdd.html', '_self');");
+               error.println("window.history.back();");
                 error.println("</script>");
                 error.println("</body>");
                 error.println("</html>");
             }
-        } finally {
-            response.sendRedirect("productAdd.html");
-        }
+        } 
+//        finally {
+//            response.sendRedirect("productAdd.html");
+//        }
 
     }
 

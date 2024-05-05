@@ -100,7 +100,8 @@ public class AddStaffDetails extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Staff ID cannot be empty!');");
-                        error.println("window.open('staffAdd.html', '_self');");
+                        //error.println("window.open('manager/StaffAdd.jsp', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -113,7 +114,7 @@ public class AddStaffDetails extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('The employee with the entered StaffID already exist!');");
-                        error.println("window.open('staffAdd.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -128,7 +129,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Please enter digits for Staff ID only!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -139,14 +140,14 @@ public class AddStaffDetails extends HttpServlet {
         //validate ic
         do {
             for (int i = 0; i < staffIc.length(); i++) { //check if ic has alphabets
-                if (Character.isAlphabetic(staffIc.charAt(i))) { //check for alphabets in ic
+                if (Character.isAlphabetic(staffIc.charAt(i))) {
                     errorExist = true;
                     try (PrintWriter error = response.getWriter()) {
                         error.println("<!DOCTYPE html>");
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Staff IC could only consist of digits!');");
-                        error.println("window.open('staffAdd.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -156,105 +157,115 @@ public class AddStaffDetails extends HttpServlet {
                     errorExist = false;
                 }
             }
-            int year = Integer.parseInt(staffIc.substring(0, 2)); //check the first 6 digits (dob)
-            int month = Integer.parseInt(staffIc.substring(2, 4));
-            int day = Integer.parseInt(staffIc.substring(4, 6));
-            if (staffIc.equals("")) { //check if ic is empty string
-                errorExist = true;
-                try (PrintWriter error = response.getWriter()) {
-                    error.println("<!DOCTYPE html>");
-                    error.println("<html>");
-                    error.println("<body>");
-                    error.println("<script type=\"text/javascript\">alert('Staff IC could not be empty!');");
-                    error.println("window.open('staffAdd.html', '_self');");
-                    error.println("</script>");
-                    error.println("</body>");
-                    error.println("</html>");
-                }
-            } else if (staffIc.length() != 12) { //check length of ic, must be 12
-                errorExist = true;
-                try (PrintWriter error = response.getWriter()) {
-                    error.println("<!DOCTYPE html>");
-                    error.println("<html>");
-                    error.println("<body>");
-                    error.println("<script type=\"text/javascript\">alert('Staff IC consists of 12 digits only!');");
-                    error.println("window.open('staffAdd.html', '_self');");
-                    error.println("</script>");
-                    error.println("</body>");
-                    error.println("</html>");
-                }
-            } else if ((year >= 33 && year <= 99) && (year >= 0 && year <= 3)) { //year can only be 1933 - 2003
-                errorExist = true;
-                try (PrintWriter error = response.getWriter()) {
-                    error.println("<!DOCTYPE html>");
-                    error.println("<html>");
-                    error.println("<body>");
-                    error.println("<script type=\"text/javascript\">alert('Invalid year on Staff IC!');");
-                    error.println("window.open('staffAdd.html', '_self');");
-                    error.println("</script>");
-                    error.println("</body>");
-                    error.println("</html>");
-                }
-            } else if (month < 1 || month > 12) { //month can only be 1 - 12
-                errorExist = true;
-                try (PrintWriter error = response.getWriter()) {
-                    error.println("<!DOCTYPE html>");
-                    error.println("<html>");
-                    error.println("<body>");
-                    error.println("<script type=\"text/javascript\">alert('Invalid month on Staff IC!');");
-                    error.println("window.open('staffAdd.html', '_self');");
-                    error.println("</script>");
-                    error.println("</body>");
-                    error.println("</html>");
-                }
-                break;
-            } else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
-                if (day < 1 || day > 31) { //month of 1,3,5,7,8,10,12, has 31 days
+            try {
+                int year = Integer.parseInt(staffIc.substring(0, 2)); //check the first 6 digits (dob)
+                int month = Integer.parseInt(staffIc.substring(2, 4));
+                int day = Integer.parseInt(staffIc.substring(4, 6));
+                if (staffIc.equals("")) { //check if ic is empty string
                     errorExist = true;
                     try (PrintWriter error = response.getWriter()) {
                         error.println("<!DOCTYPE html>");
                         error.println("<html>");
                         error.println("<body>");
-                        error.println("<script type=\"text/javascript\">alert('Invalid day of month on Staff IC!');");
-                        error.println("window.open('staffAdd.html', '_self');");
+                        error.println("<script type=\"text/javascript\">alert('Staff IC could not be empty!');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
-                    break;
-                }
-            } else if (month == 4 || month == 6 || month == 9 || month == 11) {
-                if (day < 1 || day > 30) { //month of 4,6,9,11, has 30 days
+                } else if (staffIc.length() != 12) { //check length of ic, must be 12
                     errorExist = true;
                     try (PrintWriter error = response.getWriter()) {
                         error.println("<!DOCTYPE html>");
                         error.println("<html>");
                         error.println("<body>");
-                        error.println("<script type=\"text/javascript\">alert('Invalid day of month on Staff IC!');");
-                        error.println("window.open('staffAdd.html', '_self');");
+                        error.println("<script type=\"text/javascript\">alert('Staff IC consists of 12 digits only!');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
-                    break;
-                }
-            } else if (month == 2) {
-                if (day < 1 || day > 29) { //month of 2 has 29 days
+                } else if ((year >= 33 && year <= 99) && (year >= 0 && year <= 3)) { //year can only be 1933 - 2003
                     errorExist = true;
                     try (PrintWriter error = response.getWriter()) {
                         error.println("<!DOCTYPE html>");
                         error.println("<html>");
                         error.println("<body>");
-                        error.println("<script type=\"text/javascript\">alert('Invalid day of month on Staff IC!');");
-                        error.println("window.open('staffAdd.html', '_self');");
+                        error.println("<script type=\"text/javascript\">alert('Invalid year on Staff IC!');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
-                    break;
+                } else if (month < 1 || month > 12) { //month can only be 1 - 12
+                    errorExist = true;
+                    try (PrintWriter error = response.getWriter()) {
+                        error.println("<!DOCTYPE html>");
+                        error.println("<html>");
+                        error.println("<body>");
+                        error.println("<script type=\"text/javascript\">alert('Invalid month on Staff IC!');");
+                        error.println("window.history.back();");
+                        error.println("</script>");
+                        error.println("</body>");
+                        error.println("</html>");
+                    }
+                } else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+                    if (day < 1 || day > 31) { //month of 1,3,5,7,8,10,12, has 31 days
+                        errorExist = true;
+                        try (PrintWriter error = response.getWriter()) {
+                            error.println("<!DOCTYPE html>");
+                            error.println("<html>");
+                            error.println("<body>");
+                            error.println("<script type=\"text/javascript\">alert('Invalid day of month on Staff IC!');");
+                            error.println("window.history.back();");
+                            error.println("</script>");
+                            error.println("</body>");
+                            error.println("</html>");
+                        }
+                    }
+                } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+                    if (day < 1 || day > 30) { //month of 4,6,9,11, has 30 days
+                        errorExist = true;
+                        try (PrintWriter error = response.getWriter()) {
+                            error.println("<!DOCTYPE html>");
+                            error.println("<html>");
+                            error.println("<body>");
+                            error.println("<script type=\"text/javascript\">alert('Invalid day of month on Staff IC!');");
+                            error.println("window.history.back();");
+                            error.println("</script>");
+                            error.println("</body>");
+                            error.println("</html>");
+                        }
+                    }
+                } else if (month == 2) {
+                    if (day < 1 || day > 29) { //month of 2 has 29 days
+                        errorExist = true;
+                        try (PrintWriter error = response.getWriter()) {
+                            error.println("<!DOCTYPE html>");
+                            error.println("<html>");
+                            error.println("<body>");
+                            error.println("<script type=\"text/javascript\">alert('Invalid day of month on Staff IC!');");
+                            error.println("window.history.back();");
+                            error.println("</script>");
+                            error.println("</body>");
+                            error.println("</html>");
+                        }
+                    }
+                } else {
+                    errorExist = false;
                 }
-            } else {
-                errorExist = false;
+            } catch (IndexOutOfBoundsException ex) {
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Please enter 12 digits for Staff IC!');");
+                    error.println("window.history.back();");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
             }
         } while (errorExist);
 
@@ -267,11 +278,13 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff City could not be empty!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
+            } else {
+                errorExist = false;
             }
             for (int i = 0; i < staffCity.length(); i++) {
                 if (Character.isDigit(staffCity.charAt(i))) { //check if city got digits
@@ -281,15 +294,15 @@ public class AddStaffDetails extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Staff\\'s City could only consists of alphabets!');");
-                        error.println("window.open('staffAdd.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
-                    break;
+                } else {
+                    errorExist = false;
                 }
             }
-            errorExist = false;
         } while (errorExist);
 
         //validate email 
@@ -304,7 +317,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Email could not be empty!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -316,14 +329,46 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Email with invalid format entered!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
+            } else {
+                errorExist = false;
             }
-            errorExist = false;
         } while (errorExist);
+        
+        //check for duplicate records on ic and email together
+        do{
+            if(staffDA.checkExistingEmail(staffEmail)){
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Staff account with registered email already exist!');");
+                    error.println("window.history.back();");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            }else if(staffDA.checkExistingIC(staffIc)){
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Staff account with registered ic already exist!');");
+                    error.println("window.history.back();");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            }else{
+                errorExist = false;
+            }
+        }while(errorExist);
 
         //validate address
         do {
@@ -334,7 +379,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Address could not be empty!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -353,7 +398,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Postcode could not be empty!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -365,7 +410,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Postcode consists of only 5 digits!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -379,7 +424,7 @@ public class AddStaffDetails extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Postcode only consists of digits!');");
-                            error.println("window.open('staffAdd.html', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -396,16 +441,31 @@ public class AddStaffDetails extends HttpServlet {
         int month = 0;
         int day = 0;
         try {
-            year = Integer.parseInt(staffDOB.substring(0, 4)); //extract date from dob
-            month = Integer.parseInt(staffDOB.substring(5, 7));
-            day = Integer.parseInt(staffDOB.substring(8, 10));
+            try {
+                year = Integer.parseInt(staffDOB.substring(0, 4)); //extract date from dob
+                month = Integer.parseInt(staffDOB.substring(5, 7));
+                day = Integer.parseInt(staffDOB.substring(8, 10));
+            } catch (NumberFormatException ex) {
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Please enter digits for DOB only!');");
+                    error.println("window.history.back();");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            }
         } catch (IndexOutOfBoundsException ex) {
+            errorExist = true;
             try (PrintWriter error = response.getWriter()) {
                 error.println("<!DOCTYPE html>");
                 error.println("<html>");
                 error.println("<body>");
                 error.println("<script type=\"text/javascript\">alert('Please enter 10 characters');");
-                error.println("window.open('staffAdd.html', '_self');");
+                error.println("window.history.back();");
                 error.println("</script>");
                 error.println("</body>");
                 error.println("</html>");
@@ -426,7 +486,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff DOB could not be empty!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -438,7 +498,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('DOB should be in the format of YYYY-MM-DD');"); //check if date is in correct format
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -450,7 +510,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('DOB has invalid year');"); //check if year is between 1933 - 2003
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -462,7 +522,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('DOB has invalid month!');"); //check if month is between 1 - 12
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -475,7 +535,7 @@ public class AddStaffDetails extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('DOB has invalid day on month!');"); //check if day is between 1 - 31 for following months
-                        error.println("window.open('staffAdd.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -489,7 +549,7 @@ public class AddStaffDetails extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('DOB has invalid day on month!');"); //check if day is between 1 - 30 for following months
-                        error.println("window.open('staffAdd.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -503,7 +563,7 @@ public class AddStaffDetails extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('DOB has invalid day on month!');"); //check if fay exceeds 29 for february
-                        error.println("window.open('staffAdd.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
@@ -517,7 +577,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('DOB value does not match with DOB on IC!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -536,11 +596,25 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Phone Number could not be empty!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
+            } else if (staffPhone.length() != 10 && staffPhone.length() != 11) { //check if phone number has 11 or 10 digits
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Phone Number only consists of 10 or 11 digits!');"); //check length of phoneNumber
+                    error.println("window.history.back();");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            } else {
+                errorExist = false;
             }
             for (int i = 0; i < staffPhone.length(); i++) { //check if telephone contains alphabets
                 if (Character.isAlphabetic(staffPhone.charAt(i))) {
@@ -550,30 +624,15 @@ public class AddStaffDetails extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Phone Number could only consists of digits!');"); //check for alphabets
-                        error.println("window.open('staffAdd.html', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
-                    break;
+                } else {
+                    errorExist = false;
                 }
             }
-
-            if (staffPhone.length() != 10 && staffPhone.length() != 11) { //check if phone number has 11 or 10 digits
-                errorExist = true;
-                try (PrintWriter error = response.getWriter()) {
-                    error.println("<!DOCTYPE html>");
-                    error.println("<html>");
-                    error.println("<body>");
-                    error.println("<script type=\"text/javascript\">alert('Phone Number only consists of 10 or 11 digits!');"); //check length of phoneNumber
-                    error.println("window.open('staffAdd.html', '_self');");
-                    error.println("</script>");
-                    error.println("</body>");
-                    error.println("</html>");
-                }
-                break;
-            }
-            errorExist = false;
         } while (errorExist);
 
         //validate password
@@ -589,7 +648,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Password could not be empty!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -601,12 +660,11 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Password must consist of at least 8 characters with 1 capital letter and 1 digit!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
-                break;
             } else if (!staffPassword.equals(staffConfirmPassword)) { //check if both passwords match
                 errorExist = true;
                 try (PrintWriter error = response.getWriter()) {
@@ -614,13 +672,11 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Passwords do not match!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
-
-                break;
             } else {
                 errorExist = false;
             }
@@ -635,7 +691,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Role could not be empty!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -647,13 +703,14 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Please enter \\'Admin\\', \\'Manager\\', \\'Staff\\', \\'Security\\' only!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
+            } else {
+                errorExist = false;
             }
-            errorExist = false;
         } while (errorExist);
 
         //validate name
@@ -665,7 +722,7 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Username could not be empty!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -677,13 +734,14 @@ public class AddStaffDetails extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Username is a combination of StaffID and Staff Password!');");
-                    error.println("window.open('staffAdd.html', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
+            } else {
+                errorExist = false;
             }
-            errorExist = false;
         } while (errorExist);
 
         //get all correct details
@@ -701,7 +759,7 @@ public class AddStaffDetails extends HttpServlet {
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<script type=\"text/javascript\">alert('Data added successfully!');");
-                out.println("window.open('staffAdd.html', '_self');");
+                out.println("window.history.back();");
                 out.println("</script>");
                 out.println("</body>");
                 out.println("</html>");

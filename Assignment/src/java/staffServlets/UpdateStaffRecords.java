@@ -35,6 +35,7 @@ public class UpdateStaffRecords extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         boolean errorExist = false;
+        StaffDA staffDA = new StaffDA();
         //get all the correct data
         String staffAddress = request.getParameter("addressLine1") + request.getParameter("addressLine2") + request.getParameter("addressLine3");
         String staffCity = request.getParameter("staffCity");
@@ -52,11 +53,13 @@ public class UpdateStaffRecords extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff City could not be empty!');");
-                    error.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
+            } else {
+                errorExist = false;
             }
             for (int i = 0; i < staffCity.length(); i++) {
                 if (Character.isDigit(staffCity.charAt(i))) { //check if city got digits
@@ -66,15 +69,15 @@ public class UpdateStaffRecords extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Staff\\'s City could only consists of alphabets!');");
-                        error.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
-                    break;
+                } else {
+                    errorExist = false;
                 }
             }
-            errorExist = false;
         } while (errorExist);
 
         //validate email 
@@ -89,7 +92,7 @@ public class UpdateStaffRecords extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Email could not be empty!');");
-                    error.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -101,13 +104,26 @@ public class UpdateStaffRecords extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Email with invalid format entered!');");
-                    error.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
+            } else if (staffDA.checkExistingEmail(staffEmail)) {
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Staff Account with registered email already exist!');");
+                    error.println("window.history.back();");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            } else {
+                errorExist = false;
             }
-            errorExist = false;
         } while (errorExist);
 
         //validate address
@@ -119,7 +135,7 @@ public class UpdateStaffRecords extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Address could not be empty!');");
-                    error.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -138,7 +154,7 @@ public class UpdateStaffRecords extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Postcode could not be empty!');");
-                    error.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -150,7 +166,7 @@ public class UpdateStaffRecords extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Postcode consists of only 5 digits!');");
-                    error.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -164,7 +180,7 @@ public class UpdateStaffRecords extends HttpServlet {
                             error.println("<html>");
                             error.println("<body>");
                             error.println("<script type=\"text/javascript\">alert('Postcode only consists of digits!');");
-                            error.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                            error.println("window.history.back();");
                             error.println("</script>");
                             error.println("</body>");
                             error.println("</html>");
@@ -185,11 +201,25 @@ public class UpdateStaffRecords extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Phone Number could not be empty!');");
-                    error.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
+            } else if (staffPhone.length() != 10 && staffPhone.length() != 11) { //check if phone number has 11 or 10 digits
+                errorExist = true;
+                try (PrintWriter error = response.getWriter()) {
+                    error.println("<!DOCTYPE html>");
+                    error.println("<html>");
+                    error.println("<body>");
+                    error.println("<script type=\"text/javascript\">alert('Phone Number only consists of 10 or 11 digits!');"); //check length of phoneNumber
+                    error.println("window.history.back();");
+                    error.println("</script>");
+                    error.println("</body>");
+                    error.println("</html>");
+                }
+            } else {
+                errorExist = false;
             }
             for (int i = 0; i < staffPhone.length(); i++) { //check if telephone contains alphabets
                 if (Character.isAlphabetic(staffPhone.charAt(i))) {
@@ -199,30 +229,15 @@ public class UpdateStaffRecords extends HttpServlet {
                         error.println("<html>");
                         error.println("<body>");
                         error.println("<script type=\"text/javascript\">alert('Phone Number could only consists of digits!');"); //check for alphabets
-                        error.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                        error.println("window.history.back();");
                         error.println("</script>");
                         error.println("</body>");
                         error.println("</html>");
                     }
-                    break;
+                } else {
+                    errorExist = false;
                 }
             }
-
-            if (staffPhone.length() != 10 && staffPhone.length() != 11) { //check if phone number has 11 or 10 digits
-                errorExist = true;
-                try (PrintWriter error = response.getWriter()) {
-                    error.println("<!DOCTYPE html>");
-                    error.println("<html>");
-                    error.println("<body>");
-                    error.println("<script type=\"text/javascript\">alert('Phone Number only consists of 10 or 11 digits!');"); //check length of phoneNumber
-                    error.println("window.open('UpdateStaffDetails.jsp', '_self');");
-                    error.println("</script>");
-                    error.println("</body>");
-                    error.println("</html>");
-                }
-                break;
-            }
-            errorExist = false;
         } while (errorExist);
 
         //validate role
@@ -234,7 +249,7 @@ public class UpdateStaffRecords extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Staff Role could not be empty!');");
-                    error.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
@@ -246,18 +261,17 @@ public class UpdateStaffRecords extends HttpServlet {
                     error.println("<html>");
                     error.println("<body>");
                     error.println("<script type=\"text/javascript\">alert('Please enter \\'Admin\\', \\'Manager\\', \\'Staff\\', \\'Security\\' only!');");
-                    error.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                    error.println("window.history.back();");
                     error.println("</script>");
                     error.println("</body>");
                     error.println("</html>");
                 }
+            } else {
+                errorExist = false;
             }
-            errorExist = false;
         } while (errorExist);
 
         if (!errorExist) {
-            //update the record in the database
-            StaffDA staffDA = new StaffDA();
             //get the id from the form first (set and unchanged)
             String staffid = request.getParameter("staffId");
             int id = Integer.parseInt(staffid);
@@ -272,7 +286,7 @@ public class UpdateStaffRecords extends HttpServlet {
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<script type=\"text/javascript\">alert('Data Updated Successfully!');");
-                out.println("window.open('UpdateStaffDetails.jsp', '_self');");
+                out.println("window.history.back();");
                 out.println("</script>");
                 out.println("</body>");
                 out.println("</html>");
