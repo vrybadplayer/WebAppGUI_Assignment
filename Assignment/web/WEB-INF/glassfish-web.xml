@@ -16,7 +16,15 @@
     SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
 -->
 <glassfish-web-app error-url="">
-  <context-root>/Github-GUI</context-root>
+  <context-root>/GUI</context-root>
+  <security-role-mapping>
+    <role-name>Manager</role-name>
+    <principal-name>manager</principal-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>manager</role-name>
+    <principal-name>manager</principal-name>
+  </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">
