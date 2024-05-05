@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="5.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd">
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <security-constraint>
+        <display-name>ManagerConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>Manager</web-resource-name>
+            <description>ManagerConstraint</description>
+            <url-pattern>/manager/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Manager(web)</web-resource-name>
+            <description/>
+            <url-pattern>/manager/staffAdd.html</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>manager</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>file</realm-name>
+    </login-config>
+    <security-role>
+        <description>staff CRUD</description>
+        <role-name>manager</role-name>
+    </security-role>
     <servlet>
         <servlet-name>AddStaffDetails</servlet-name>
         <servlet-class>staffServlets.AddStaffDetails</servlet-class>
