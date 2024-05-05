@@ -71,6 +71,7 @@ public class ProductsServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     //@PersistenceContext
     private EntityManager entityManager;
 

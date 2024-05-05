@@ -33,23 +33,23 @@ public class DeleteProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Product prod = new Product();
-        int ProdID = Integer.parseInt(request.getParameter("ProdID"));
-        prod.deleteRecord(ProdID);
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Delete Product</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<script type=\"text/javascript\">alert('Product record deleted successfully');");
-            out.println("window.open('productDelete.jsp', '_self');");
-            out.println("</script>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+//        Product prod = new Product();
+//        int ProdID = Integer.parseInt(request.getParameter("ProdID"));
+//        Product.deleteRecord(ProdID);
+//        response.setContentType("text/html;charset=UTF-8");
+//        try (PrintWriter out = response.getWriter()) {
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet Delete Product</title>");
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<script type=\"text/javascript\">alert('Product record deleted successfully');");
+//            out.println("window.open('productDelete.jsp', '_self');");
+//            out.println("</script>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -78,54 +78,72 @@ public class DeleteProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        EntityManager em = (EntityManager) request.getAttribute("javax.persistence.EntityManager");
-
-        UserTransaction utx = (UserTransaction) request.getAttribute("javax.transaction.UserTransaction");
-
-        EntityTransaction transaction = null;
-        
-        try {
-            utx.begin();
-            transaction = em.getTransaction();
-
-            javax.persistence.Query query = em.createNamedQuery("ProductModel.deleteProduct");
-
-            query.setParameter("prodId", Integer.parseInt(request.getParameter("ProdID")));
-            
-            //Update
-            query.executeUpdate();
-
-            transaction.commit();
-
-            try (PrintWriter error = response.getWriter()) {
-                error.println("<!DOCTYPE html>");
-                error.println("<html>");
-                error.println("<body>");
-                error.println("<script type=\"text/javascript\">alert('Product Deleted Successfully!');");
-                error.println("window.open('productDelete.jsp', '_self');");
-                error.println("</script>");
-                error.println("</body>");
-                error.println("</html>");
-            }
-        } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-            try (PrintWriter error = response.getWriter()) {
-                error.println("<!DOCTYPE html>");
-                error.println("<html>");
-                error.println("<body>");
-                error.println("<script type=\"text/javascript\">alert('Error Occured!');");
-                error.println("window.open('productDelete.jsp', '_self');");
-                error.println("</script>");
-                error.println("</body>");
-                error.println("</html>");
-            }
-        } finally {
-            response.sendRedirect("productDelete.jsp");
+        Product prod = new Product();
+        int ProdID = Integer.parseInt(request.getParameter("ProdID"));
+        System.out.println(ProdID);
+        Product.deleteRecord(ProdID);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Delete Product</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<script type=\"text/javascript\">alert('Product record deleted successfully');");
+            out.println("window.open('staff/product/productDelete.jsp', '_self')");
+            out.println("</script>");
+            out.println("</body>");
+            out.println("</html>");
         }
+//        
+//        EntityManager em = (EntityManager) request.getAttribute("javax.persistence.EntityManager");
+//
+//        UserTransaction utx = (UserTransaction) request.getAttribute("javax.transaction.UserTransaction");
+//
+//        EntityTransaction transaction = null;
+//        
+//        try {
+//            utx.begin();
+//            transaction = em.getTransaction();
+//
+//            javax.persistence.Query query = em.createNamedQuery("ProductModel.deleteProduct");
+//
+//            query.setParameter("prodId", Integer.parseInt(request.getParameter("ProdID")));
+//            
+//            //Update
+//            query.executeUpdate();
+//
+//            transaction.commit();
+//
+//            try (PrintWriter error = response.getWriter()) {
+//                error.println("<!DOCTYPE html>");
+//                error.println("<html>");
+//                error.println("<body>");
+//                error.println("<script type=\"text/javascript\">alert('Product Deleted Successfully!');");
+//                error.println("window.open('productDelete.jsp', '_self');");
+//                error.println("</script>");
+//                error.println("</body>");
+//                error.println("</html>");
+//            }
+//        } catch (Exception e) {
+//            if (transaction != null && transaction.isActive()) {
+//                transaction.rollback();
+//            }
+//            e.printStackTrace();
+//            try (PrintWriter error = response.getWriter()) {
+//                error.println("<!DOCTYPE html>");
+//                error.println("<html>");
+//                error.println("<body>");
+//                error.println("<script type=\"text/javascript\">alert('Error Occured!');");
+//                error.println("window.open('productDelete.jsp', '_self');");
+//                error.println("</script>");
+//                error.println("</body>");
+//                error.println("</html>");
+//            }
+//        } finally {
+//            response.sendRedirect("productDelete.jsp");
+//        }
     }
 
     /**

@@ -129,11 +129,11 @@ public class Product {
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setInt(1, prodID);
 
-                stmt.executeQuery();
+                stmt.executeUpdate();
 
             }
         } catch (SQLException ex) {
-
+            ex.printStackTrace();
         }
     }
 
