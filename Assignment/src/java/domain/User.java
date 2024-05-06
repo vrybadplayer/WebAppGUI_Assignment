@@ -41,7 +41,7 @@ public class User implements Serializable {
         return custID;
     }
     
-    public void setCustID(){
+    public void setCustID(int custID){
         this.custID = custID;
     }
     
