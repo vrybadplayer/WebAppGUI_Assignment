@@ -407,6 +407,7 @@ button {
     text-align: left;
     white-space: nowrap;
     z-index: 36;
+    text-decoration: underline;
 }
 .rating-score {
     display: flex;

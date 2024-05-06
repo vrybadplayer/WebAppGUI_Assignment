@@ -1,0 +1,385 @@
+:root {
+  --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
+    "Source Han Sans CN", sans-serif;
+}
+
+.main-container {
+  overflow: hidden;
+}
+
+.main-container,
+.main-container * {
+  box-sizing: border-box;
+}
+
+input,
+select,
+textarea,
+button {
+  outline: 5;
+}
+
+.main-container {
+  position: relative;
+  width: 1600px;
+  height: 793px;
+  margin: 0 auto;
+}
+.button {
+  position: relative;
+  width: 527px;
+  height: 91px;
+  margin: 67px 0 0 544px;
+  cursor: pointer;
+  background: transparent;
+  background: no-repeat center;
+  background-size: cover;
+  border: none;
+  z-index: 32;
+  
+}
+.leave-a-review {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  width: 358px;
+  height: 55px;
+  top: 18px;
+  left: 85px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 55px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 33;
+}
+.frame {
+  position: relative;
+  width: 1164px;
+  height: 144px;
+  margin: 32.5px 0 0 221.5px;
+  font-size: 0px;
+  background: url(./reviewAssets/images/0bba632f-de63-4c7a-8507-04f5ecfd1d52.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 22;
+  overflow: visible auto;
+}
+.username {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  width: 69px;
+  height: 23px;
+  margin: 13.5px 0 0 543.5px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 22.98px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 23;
+}
+.flex-row-bf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 148px;
+  height: 20px;
+  margin: 2px 0 0 504.5px;
+  z-index: 30;
+}
+.star {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/c5708148-d476-4b6d-8366-a9187450e8f0.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 30;
+}
+.star-1 {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/d9c1d47f-feee-4690-9ef1-28decb302cf2.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 29;
+}
+.star-2 {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/d95691ca-096e-4d29-87a1-07c307da901e.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 28;
+}
+.star-3 {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/08977aeb-8ea0-4ad0-97cc-ec2e191862fa.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 27;
+}
+.star-4 {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/af48c32f-353e-492c-bf0e-47accde97beb.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 26;
+}
+.comment {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  width: 1113px;
+  height: 48px;
+  margin: 8px 0 0 21.5px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.384px;
+  text-align: center;
+  z-index: 24;
+}
+.frame-5 {
+  position: relative;
+  width: 1164px;
+  height: 144px;
+  margin: 31px 0 0 221.5px;
+  font-size: 0px;
+  background: url(./reviewAssets/images/2612feae-883f-4fce-8bf0-d2dc5e7768b6.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 12;
+  overflow: visible auto;
+}
+.username-6 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  width: 69px;
+  height: 23px;
+  margin: 13.5px 0 0 543.5px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 22.98px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 13;
+}
+.flex-row-da {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 148px;
+  height: 20px;
+  margin: 2px 0 0 504.5px;
+  z-index: 20;
+}
+.star-7 {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/9fe85bd5-c278-4dfb-8903-36944ff79d85.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 20;
+}
+.star-8 {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/0f759f14-0ed3-4f52-bd55-647333560b7b.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 19;
+}
+.star-9 {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/664850f9-f06f-43b4-b195-06fb055556af.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 18;
+}
+.star-a {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/df71f5ab-55a9-4423-9cf7-22a8be082fb4.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 17;
+}
+.star-b {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/94331c96-8834-41bd-9215-a7c48ac24377.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 16;
+}
+.comment-c {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  width: 1113px;
+  height: 48px;
+  margin: 8px 0 0 21.5px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.384px;
+  text-align: center;
+  z-index: 14;
+}
+.frame-d {
+  position: relative;
+  width: 1164px;
+  height: 144px;
+  margin: 31px 0 0 221.5px;
+  font-size: 0px;
+  background: url(./reviewAssets/images/f3ca87e8-abba-4131-8f86-9a43bef0e365.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 2;
+  overflow: visible auto;
+}
+.username-e {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  width: 69px;
+  height: 23px;
+  margin: 13.5px 0 0 543.5px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 22.98px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 3;
+}
+.flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 148px;
+  height: 20px;
+  margin: 2px 0 0 504.5px;
+  z-index: 10;
+}
+.star-f {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/c6ec3b7d-a455-4faa-a8a3-aa43ba5f00b2.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 10;
+}
+.star-10 {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/079ba26f-6a31-4689-8f90-cd26210a7926.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 9;
+}
+.star-11 {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/3e5690ed-71d3-4286-ac98-f39d904b63ed.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 8;
+}
+.star-12 {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/c63fc7d2-b91f-4546-ae0f-365ce593e779.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 7;
+}
+.star-13 {
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: url(./reviewAssets/images/5d8f28c0-65e9-411c-bb82-b015d8ef4a26.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 6;
+}
+.comment-14 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  width: 1113px;
+  height: 48px;
+  margin: 8px 0 0 21.5px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.384px;
+  text-align: center;
+  z-index: 4;
+}
+.background {
+  position: absolute;
+  width: 1600px;
+  height: 814px;
+  top: 0;
+  left: 0;
+  background: url(./reviewAssets/images/80f2db70-8331-49a9-8aac-71ebdd46e481.png)
+    no-repeat center;
+  background-size: cover;
+}

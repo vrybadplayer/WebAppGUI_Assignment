@@ -20,6 +20,10 @@
         <servlet-name>DeleteProduct</servlet-name>
         <servlet-class>productsServlet.DeleteProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>reviewServlet</servlet-name>
+        <servlet-class>productsServlet.reviewServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddStaffDetails</servlet-name>
         <url-pattern>/AddStaffDetails</url-pattern>
@@ -87,5 +91,9 @@
     <servlet-mapping>
         <servlet-name>DeleteProduct</servlet-name>
         <url-pattern>/DeleteProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>reviewServlet</servlet-name>
+        <url-pattern>/reviewServlet</url-pattern>
     </servlet-mapping>
 </web-app>

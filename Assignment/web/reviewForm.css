@@ -1,0 +1,169 @@
+:root {
+  --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
+    "Source Han Sans CN", sans-serif;
+}
+
+.main-container {
+  overflow: hidden;
+}
+
+.main-container,
+.main-container * {
+  box-sizing: border-box;
+}
+
+input,
+select,
+textarea,
+button {
+  outline: 0;
+}
+
+.main-container {
+  position: relative;
+  width: 1600px;
+  height: 782px;
+  margin: 0 auto;
+}
+.bg {
+  position: absolute;
+  width: 1600px;
+  height: 782px;
+  top: 0;
+  left: 0;
+  background: #ffffff;
+}
+.form-frame {
+  position: absolute;
+  width: 921px;
+  height: 584px;
+  top: 99px;
+  left: 339px;
+  background: url(./reviewFormAssets/images/6b695f4b-2f57-4ec7-8b45-b74302c0db90.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 1;
+}
+.form {
+  position: absolute;
+  width: 889px;
+  height: 552px;
+  top: 115px;
+  left: 355px;
+  z-index: 2;
+}
+.flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 748px;
+  height: 67px;
+  margin: 45px 0 0 52px;
+  z-index: 5;
+}
+.rating {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  width: 177px;
+  height: 67px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 55.152px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 4;
+}
+.rating-input {
+  flex-shrink: 0;
+  position: relative;
+  width: 523px;
+  height: 67px;
+  background: url(./reviewFormAssets/images/bd0ddca5-047e-4b72-b0a9-d6adb41c80eb.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 5;
+}
+.flex-row-dd {
+  position: relative;
+  width: 748px;
+  height: 297px;
+  margin: 33px 0 0 52px;
+  z-index: 6;
+}
+.review {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  width: 177px;
+  height: 67px;
+  top: 0;
+  left: 0;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 55.152px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 3;
+}
+.review-input {
+  position: absolute;
+  width: 523px;
+  height: 297px;
+  top: 0;
+  left: 225px;
+  background: url(./reviewFormAssets/images/10c53590-59e9-464c-a058-a5167846978b.png)
+    no-repeat center;
+  background-size: cover;
+  z-index: 6;
+}
+.submit-button {
+  position: relative;
+  width: 218px;
+  height: 55px;
+  margin: 33px 0 0 582px;
+  cursor: pointer;
+  font-size: 0px;
+  background: transparent;
+  border: none;
+  z-index: 7;
+  overflow: visible auto;
+}
+.submit {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  width: 116px;
+  height: 41px;
+  margin: 7px 0 0 51px;
+  color: #3d3d3d;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 41px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 9;
+}
+.rectangle {
+  position: absolute;
+  width: 218px;
+  height: 55px;
+  top: 0;
+  left: 0;
+  background: #ffffff;
+  border: 1px solid #3d3d3d;
+  z-index: 8;
+  border-radius: 10px;
+}

@@ -47,6 +47,10 @@ public class Customer {
     public int getCustID() {
         return CustID;
     }
+
+    public String getCustName() {
+        return CustName;
+    }
     
     //Returns Customer Object
     public static Customer SearchCustomer(int id) {

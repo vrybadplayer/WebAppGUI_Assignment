@@ -1,0 +1,1203 @@
+:root{
+    --purple:#8500A6;
+}
+
+@font-face {
+    font-family: Ubuntu-B;
+    src: url(Ubuntu-B.ttf);
+}
+
+@font-face {
+    font-family: Ubuntu-M;
+    src: url(Ubuntu-M.ttf);
+}
+
+@font-face {
+    font-family: Ubuntu-R;
+    src: url(Ubuntu-R.ttf);
+}
+
+*{
+    margin:0; 
+    padding:0;
+    box-sizing: border-box;
+    font-family: Ubuntu-R;
+    outline: none; border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: .2s linear;
+}
+
+body {
+    position: relative;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+}
+
+html{
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    overflow-x: hidden;
+}
+
+.cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    transition: 0.2s;
+    transform: translate (-50%, -50%);
+    pointer-events: none;
+    mix-blend-mode: difference;
+}
+
+header{
+    position: fixed;
+    top:0; left: 0; right: 0;
+    background-color: #fff;
+    padding: 2rem 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    
+}
+
+
+header .logoImg {
+    width: 25px;
+    height: 23px;
+    margin-right: 3px;
+}
+
+header .logoText {
+    font-size: 3rem;
+    color:#333;
+    font-weight: bolder;
+    font-family: Ubuntu-B;
+    
+}
+
+header .logo span {
+    color:var(--purple);
+}
+
+header .navbar {
+    display: flex;
+    align-items: center;
+
+}
+
+header .navbar:hover {
+
+}
+
+.searchBar {
+    border: 2px solid #333;
+    border-radius: 15px;
+    padding: 3px 50px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.searchBar i {
+    height: auto;
+    font-size: 15px;
+    margin-left: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color: rgba(0, 0, 0, 0.711);
+    
+}
+
+.searchBar button {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.searchBar input {
+    padding-left: 5px;
+}
+
+
+
+
+
+
+
+header .navbar a{
+    font-size: 2rem;
+    padding:0 1.5rem;
+    color:#333333d6;
+    font-family: Ubuntu-M;
+    
+}
+
+
+
+
+
+header .navbar a:hover{
+    color: #4b0074;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+}
+
+header .navbar .cart img {
+    background-color: #ffffff00;
+    height: auto;
+    max-width: 50px;
+    
+    
+}
+
+header .navbar .cart:hover {
+    padding-bottom: 5px;
+    opacity: 90%;
+}
+
+
+
+header .navbar .loginBtn a{
+    background-color: #4b0074;
+    border-radius: 18px;
+    margin-left: 100px;
+    padding: 7px 35px;
+    color: #ffffff;
+    font-family: Ubuntu-R;
+}
+
+header .navbar .loginBtn a:hover {
+    background-color: rgb(255, 255, 255);
+    color: #4b0074;
+    border: 2.5px solid #4b0074;
+    
+}
+
+
+
+header .icons a{
+    font-size: 2.5rem;
+    color:#333;
+    margin-left: 1.5rem;
+}
+
+header .icons a:hover{
+    color:var(--purple);
+}
+
+header #toggler{
+    display: none;
+}
+
+header .fa-bars{
+    font-size: 3rem;
+    color:#333;
+    border-radius: .5rem;
+    padding:.5rem 1.5rem;
+    cursor: pointer;
+    border:.1rem solid rgba(0,0,0,.3);
+    display:none;
+}
+
+
+
+.dropdown {
+    
+    padding: 50px 50px;
+    background-color: #eeeeee;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index:100;
+    width: 100%;
+    display: none;
+    position: fixed;
+
+   
+
+}
+
+.navDropDown .courseLink:hover ~ .dropdown {
+    visibility: visible;
+    transition: 0.5s;
+    opacity: 1;
+    z-index:100;
+}
+
+
+
+.dropdown ul {
+    text-decoration: none;
+    list-style-type: none;
+    
+}
+
+.dropdown ul li h2 {
+    font-family: Ubuntu-B;
+    font-size: 2rem;
+    color:#666;
+}
+
+.dropdown ul li a {
+    font-family: Ubuntu-R;
+    font-size: 2em;
+    color: #666666b1;
+}
+
+.dropdown ul li a:hover {
+    color:#2e2e2e;
+}
+
+header .navbar .courseLink:hover + .dropdown {
+    display: block;
+
+}
+
+
+footer {
+    background: linear-gradient(90deg, #2b1a73 , #954dbd);
+    background-size: 300% 300%;
+    animation: color 12s ease-in-out infinite;
+    position: absolute;
+    width:100%;
+    
+    
+}
+
+footer .footBg {
+    background-color: rgba(0, 0, 0, 0.559);
+}
+
+footer .footLinks {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 30px 5%;
+    padding-right: 50%;
+
+
+}
+
+
+.footLinks ul {
+    text-decoration: none;
+    list-style-type: none;
+}
+
+
+
+.footerL1, .footerL2{
+    padding-right: 100px;
+
+}
+
+
+
+.footerL1 ul li h2 {
+    font-family: Ubuntu-B;
+    font-size: 2rem;
+    color: #ffffff;
+    font-weight: bold;
+    align-items: center;
+}
+
+.footerL1 ul li a {
+    font-family: Ubuntu-R;
+    font-size: 2em;
+    font-weight: 100;
+    color: #ffffff;
+}
+
+.footerL1 ul li a:hover {
+    font-family: Ubuntu-R;
+    font-weight: 100;
+    font-size: 2em;
+    color: #ffffff93;
+}
+
+
+.footerL2 ul li h2 {
+    font-family: Ubuntu-B;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.footerL2 ul li a {
+    font-family: Ubuntu-R;
+    font-weight: 100;
+    font-size: 2em;
+    color: #ffffff;
+}
+
+.footerL2 ul li a:hover {
+    font-family: Ubuntu-R;
+    font-weight: 100;
+    font-size: 2em;
+    color: #ffffff93;
+}
+
+footer .line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin-left: 5%;
+    height: 1px;
+    background-color: #ffffff;
+}
+
+.footLinks2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 30px 5%;
+    
+}
+
+.footLinks2 p {
+    font-family: Ubuntu-R;
+    font-size: 2em;
+    color: #ffffff;
+    align-items: center;
+
+}
+
+.footLinks2 a {
+    text-decoration: none;
+    padding: 10px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 60%;
+
+}
+
+.space {
+
+    margin-left: 55%;
+    margin-right: -5.5%;
+}
+
+.footLinks2 a:hover {
+    background-color: #111;
+    transition: 0.5s;
+    
+}
+
+
+.footLinks2 .favicon a {
+    font-size: 2em;
+    color: black;
+    opacity: 0.9;
+    border-radius: 100%;
+
+}
+
+.footLinks2 .favicon a:hover {
+    color:white;
+    transition: 0.5s;
+    
+}
+
+
+
+@media (max-width:991px){
+    html{
+        font-size: 55%;
+    }
+
+    header{
+        padding:2rem;
+    }
+}
+
+@media (max-width:768px){
+    header .fa-bars{
+        display: block;
+    }
+
+    header .navbar{
+        position:absolute;
+        top:100%; left:0; right:0;
+        background:#eee;
+        border-top: .1rem solid rgba(0,0,0,.1);
+        clip-path: polugon(0 0, 100% 0, 100% 0, 0 0);
+    }
+
+    header #toggler:checked ~ .navbar{
+        clip-path:polygon(0 0,100% 0, 100% 100%, 0% 100%);
+    }
+
+    header .navbar a{
+        margin:1.5rem;
+        padding:1.5rem;
+        background:#fff;
+        border:.1rem solid rgba(0,0,0,.1);
+        display: block;
+    }
+}
+
+
+/* -- Content -- */
+
+.main {
+    position: relative;
+    height: auto;
+    width: 100%;
+    margin-top: 76.44px;
+    
+    background: linear-gradient(90deg, #2b1a73 , #954dbd);
+    background-size: 300% 300%;
+    animation: color 12s ease-in-out infinite;
+    
+
+}
+
+.main .overlay {
+    background-image: url(new3-01.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+}
+
+.main .overlay .firstSec {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.46);
+    width: 100%;
+    height: 100%;
+    box-shadow: 8rem 1rem 2rem rgba(0, 0, 0, 0.292);
+    
+
+}
+
+.main .para h1 {
+    font-family: Ubuntu-B;
+    font-size: 7rem;
+    color:#ffffff;
+
+}
+
+.main .para h1:hover ~ .cursor {
+    transform: scale(6);
+}
+
+.main .para h3 {
+    font-family: Ubuntu-M;
+    font-size: 4rem;
+    color:#ffffff;
+    margin-top: 10px;
+    text-transform: none;
+
+}
+
+.main .para h3:hover ~ .cursor {
+    transform: scale(6);
+}
+
+
+
+.main .para p {
+    font-family: Ubuntu-R;
+    font-size: 2rem;
+    color:#ffffff;
+    text-transform: none;
+
+}
+
+.main .para p:hover ~ .cursor {
+    transform: scale(6);
+}
+
+
+
+.main .para a button {
+    margin-top: 50px;
+    font-family: Ubuntu-M;
+    font-size: 2rem;
+    color:#ffffff;
+    text-transform: none;
+    border-radius: 20px;
+    padding: 15px 15px;
+    background-color: #ffffff00;
+    border: 2px solid;
+    border-color: #ffffff;
+    margin-top: 30px;
+}
+
+.main .para a button:hover{
+    background-color: #ffffff;
+    color: #4b0074;
+    padding: 20px 20px;
+    cursor: pointer;
+}
+
+
+
+
+
+@keyframes color {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+.courseVector{
+    width: 35%;
+    height: 35%;
+    margin-top: 150px;
+    margin-bottom: 150px;
+    
+}
+
+.courseVector:hover {
+    
+    opacity: 0;
+    transition: 5s ease;
+}
+
+.secondSec {
+    box-shadow: 8rem 1rem 2rem rgba(0, 0, 0, 0.292);
+    
+}
+
+.secondSec h2 {
+    font-family: Ubuntu-R;
+    font-size: 2.5rem;
+    color:#ffffff;
+    text-transform: none;
+    padding: 100px 50px;
+    padding-bottom: 20px;
+    text-align: center;
+   
+    
+}
+
+.secondSec .banner {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.secondSec .banner img {
+    background-color: #ffffff;
+    padding: 25px 50px;
+    width: 15%;
+    height: 15%;
+    margin: 10px 20px;
+    border-radius: 20px;
+    margin-bottom: 100px;
+}
+
+.secondSec .banner .huawei {
+    width: 15%;
+    height: 15%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.secondSec .banner .huawei:hover {
+    cursor: pointer;
+    box-shadow: 0 0 35px 5px #ffffff49;
+    width: 16%;
+    height: 16%;
+}
+
+.secondSec .banner .duke {
+    width: 12%;
+    height: 12%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+}
+
+.secondSec .banner .duke:hover {
+    cursor: pointer;
+    box-shadow: 0 0 35px 5px #ffffff49;
+    width: 13%;
+    height: 13%;
+}
+
+.secondSec .banner .google {
+    width: 12%;
+    height: 12%;
+}
+
+.secondSec .banner .google:hover {
+    cursor: pointer;
+    box-shadow: 0 0 35px 5px #ffffff49;
+    width: 13%;
+    height: 13%;
+}
+
+.secondSec .banner .stanford {
+    width: 16%;
+    height: 16%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+
+}
+
+.secondSec .banner .stanford:hover {
+    cursor: pointer;
+    box-shadow: 0 0 35px 5px #ffffff49;
+    width: 17%;
+    height: 17%;
+}
+
+.thirdSec {
+    background-color: #ffffff;
+    
+}
+
+.thirdSec .thirdContainer {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thirdSec h1 {
+    
+    padding-top: 50px;
+    padding-bottom: 20px;
+    color: #4b0074;
+    font-family: Ubuntu-B;
+    font-size: 3.0rem;
+    font-weight: bold;
+    text-transform: none;
+    text-align: center;
+}
+
+.thirdSec h2 {
+    font-family: Ubuntu-M;
+    font-size: 2rem;
+    color:#4b0074;
+    text-transform: none;
+    text-align: center;
+    padding-top: 10px;
+}
+
+
+.thirdSec .text {
+    font-family: Ubuntu-R;
+    font-size: 1.7rem;
+    color:#4b0074;
+    padding: 50px 50px;
+    
+    margin-bottom: 50px;
+    text-align: center;
+    
+}
+
+.thirdSec .text:hover {
+    border: 3px solid #4b0074;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.thirdSec .text p {
+    text-transform: none;
+    font-family: Ubuntu-R;
+    padding-top: 10px;
+}
+
+.forthSec {
+    background-color: rgba(0, 0, 0, 0.46);
+    width: 100%;
+    height: 100%;
+    box-shadow: 8rem 1rem 2rem rgba(0, 0, 0, 0.292);
+}
+
+.forthSec h2{
+    padding-top: 50px;
+    padding-bottom: 10px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: Ubuntu-B;
+
+}
+
+.forthSec h3 {
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.6rem;
+    font-family: Ubuntu-M;
+}
+
+.forthSec .forthContainer {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    
+    
+}
+
+.forthContainer .text2 {
+    font-family: Ubuntu-R;
+    font-size: 2rem;
+    color:#4b0074;
+    padding: 50px 50px;
+    
+
+    text-align: center;
+}
+
+
+
+.text2 img {
+    max-width: 65%;
+    height: auto;
+    margin-bottom: 25px;
+    border-radius: 100%;
+}
+
+.text2 img:hover {
+    cursor: pointer;
+    box-shadow: 0 0 35px 5px #ffffff49;
+
+}
+
+.text2 p {
+    color: #ffffff;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-family: Ubuntu-R;
+}
+
+.text2 p:hover {
+    font-size: 1.6rem;
+    color: #ffffffc0;
+}
+
+.fifthSec {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    
+
+}
+
+.fifthSec .para2 h1 {
+    font-family: Ubuntu-B;
+    font-size: 7rem;
+    color:#ffffff;
+
+}
+
+.fifthSec .para2 h3 {
+    font-family: Ubuntu-M;
+    font-size: 4rem;
+    color:#ffffff;
+    margin-top: 10px;
+    text-transform: none;
+
+}
+
+.fifthSec .para2 p {
+    padding-top: 20px;
+    font-family: Ubuntu-R;
+    font-size: 2rem;
+    color:#ffffff;
+    text-transform: none;
+
+}
+
+.fifthSec .para2 a button {
+    margin-top: 50px;
+    font-family: Ubuntu-M;
+    font-size: 2rem;
+    color:#ffffff;
+    text-transform: none;
+    border-radius: 20px;
+    padding: 15px 15px;
+    background-color: #ffffff00;
+    border: 2px solid;
+    border-color: #ffffff;
+    margin-top: 30px;
+}
+
+.fifthSec .para2 a button:hover{
+    background-color: #ffffff;
+    color: #4b0074;
+    padding: 20px 20px;
+    cursor: pointer;
+}
+
+.bgCube {
+    max-width: 35%;
+    height: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    
+}
+
+/* -- Top Product -- */
+
+.topSellSec {
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    box-shadow: 8rem 1rem 2rem rgba(0, 0, 0, 0.292);
+}
+
+.topSellSec h1{
+    padding-top: 50px;
+    padding-bottom: 10px;
+    color: #4b0074;
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: Ubuntu-B;
+
+}
+
+
+.topSellSec .topSellContainer {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    
+    
+}
+
+.topSellContainer .text3 {
+    font-family: Ubuntu-R;
+    font-size: 2rem;
+    color:#4b0074;
+    padding: 30px 30px;
+    margin-right: 10px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.text4 h2 {
+    color: #4b0074;
+    text-align: left;
+    font-size: 1.6rem;
+    font-family: Ubuntu-M;
+}
+
+
+
+.text3 img {
+    max-width: 250px;
+    
+    height: 150px;
+    margin-bottom: 25px;
+    border-radius: 5%;
+    border: 1px solid #adacaa;
+    
+}
+
+.text3 img:hover {
+    cursor: pointer;
+    box-shadow: 0 0 35px 5px #ffffff49;
+    
+
+}
+.text4 .checked {
+    color: orange;
+}
+
+.text4 span {
+    color: orange;
+}
+
+
+.text4 p {
+    color: #4b0074;
+    
+    text-align: left;
+    font-size: 1.5rem;
+    font-family: Ubuntu-M;
+}
+
+.price {
+    display: flex;
+    justify-content: flex-start;
+    
+}
+
+.text4 a button {
+    background-color: #ffffff;
+    padding: 5px 10px;
+    border: 1px solid #4b0074;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 1.8rem;
+    font-family: Ubuntu-M;
+    
+}
+
+.text4 a button:hover {
+    background-color: black;
+    color: #ffffff;
+    padding: 6px 11px;
+}
+
+
+
+
+/* -- Birthday -- */
+.birthSec {
+    
+    width: 100%;
+    height: 100%;
+    box-shadow: 8rem 1rem 2rem rgba(0, 0, 0, 0.292);
+    background-color: rgba(0, 0, 0, 0.46);
+}
+
+.birthSec h1{
+    padding-top: 50px;
+    padding-bottom: 5px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: Ubuntu-B;
+
+}
+
+.birthSec .h2 {
+    padding-bottom: 15px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 2rem;
+    font-family: Ubuntu-M;
+    opacity: 80%;
+    text-transform: none;
+}
+
+
+.birthSec .birthContainer {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    
+    
+}
+
+.birthContainer .cake {
+    height: 300px;
+    width: auto;
+    margin-right: 20px;
+    
+}
+
+.birthContainer .text5 {
+    font-family: Ubuntu-R;
+    font-size: 2rem;
+    color:#4b0074;
+    padding: 30px 30px;
+    margin-right: 10px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.text6 h2 {
+    color: #ffffff;
+    text-align: left;
+    font-size: 1.6rem;
+    font-family: Ubuntu-M;
+}
+
+
+
+.text5 img {
+    max-width: 250px;
+    
+    height: 150px;
+    margin-bottom: 25px;
+    border-radius: 5%;
+    border: 1px solid #adacaa;
+    
+}
+
+.text5 img:hover {
+    cursor: pointer;
+    box-shadow: 0 0 35px 5px #ffffff49;
+    
+
+}
+.text6 .checked {
+    color: orange;
+}
+
+.text6 span {
+    color: orange;
+}
+
+
+.text6 p {
+    color: #ffffff;
+    
+    text-align: left;
+    font-size: 1.5rem;
+    font-family: Ubuntu-M;
+}
+
+.price {
+    display: flex;
+    justify-content: flex-start;
+    
+}
+
+.price #p2 {
+    text-decoration: line-through;
+}
+
+.text6 a button {
+    background-color: #ffffff;
+    padding: 5px 10px;
+    border: 1px solid #4b0074;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 1.8rem;
+    font-family: Ubuntu-M;
+    
+}
+
+.text6 a button:hover {
+    background-color: #e0e0e0;
+    padding: 6px 11px;
+}
+
+
+
+/* -- Event -- */
+.eventSec {
+    
+    width: 100%;
+    height: 100%;
+    box-shadow: 8rem 1rem 2rem rgba(0, 0, 0, 0.292);
+    background-color: rgba(0, 0, 0, 0.46);
+}
+
+.eventSec h1{
+    padding-top: 50px;
+    padding-bottom: 5px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: Ubuntu-B;
+
+}
+
+.eventSec .h2 {
+    padding-bottom: 15px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 2rem;
+    font-family: Ubuntu-M;
+    opacity: 80%;
+    text-transform: none;
+}
+
+
+.eventSec .eventContainer {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    
+    
+}
+
+.eventContainer img {
+    height: 300px;
+    width: auto;
+    margin-right: 20px;
+    
+}
+
+.eventContainer .text5 {
+    font-family: Ubuntu-R;
+    font-size: 2rem;
+    color:#4b0074;
+    padding: 30px 30px;
+    margin-right: 10px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.text6 h2 {
+    color: #ffffff;
+    text-align: left;
+    font-size: 1.6rem;
+    font-family: Ubuntu-M;
+}
+
+
+.text5 img {
+    max-width: 250px;
+    
+    height: 150px;
+    margin-bottom: 25px;
+    border-radius: 5%;
+    border: 1px solid #adacaa;
+    
+}
+
+.text5 img:hover {
+    cursor: pointer;
+    box-shadow: 0 0 35px 5px #ffffff49;
+    
+
+}
+.text6 .checked {
+    color: orange;
+}
+
+.text6 span {
+    color: orange;
+}
+
+
+.text6 p {
+    color: #ffffff;
+    
+    text-align: left;
+    font-size: 1.5rem;
+    font-family: Ubuntu-M;
+}
+
+.price {
+    display: flex;
+    justify-content: flex-start;
+    
+}
+
+.price #p2 {
+    text-decoration: line-through;
+}
