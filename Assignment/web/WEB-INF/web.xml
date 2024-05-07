@@ -88,7 +88,6 @@
         <servlet-name>DeleteProduct</servlet-name>
         <url-pattern>/DeleteProduct</url-pattern>
     </servlet-mapping>
-    <servlet-class>Servlets.CustForgotPassword</servlet-class>
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
         <location>/Error.jsp</location>
@@ -131,7 +130,32 @@
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/update</url-pattern>
     </servlet-mapping>
-
     
+    <servlet>
+        <servlet-name>cardServlet</servlet-name>
+        <servlet-class>paymentServlet.cardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cardServlet</servlet-name>
+        <url-pattern>/cardServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ewalletServlet</servlet-name>
+        <servlet-class>paymentServlet.ewalletServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ewalletServlet</servlet-name>
+        <url-pattern>/ewalletServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>confirmpayment</servlet-name>
+        <servlet-class>paymentServlet.confirmpayment</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>confirmpayment</servlet-name>
+        <url-pattern>/confirmpayment</url-pattern>
+    </servlet-mapping>
     
 </web-app>

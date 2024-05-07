@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Select Payment Method</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+
+            .container {
+                width: 400px;
+                border-radius: 8px;
+                padding: 40px;
+                box-shadow: 0 5px 12px -2px rgba(0, 0, 0, 0.1), 0 18px 36px -6px rgba(0, 0, 0, 0.1);
+            }
+
+            .container .title {
+                font-size: 20px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .container form input {
+                display: none;
+            }
+
+            .container form .category {
+                margin-top: 10px;
+                padding-top: 20px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-gap: 15px;
+            }
+
+            .category label {
+                height: 145px;
+                padding: 20px;
+                box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                border-radius: 5px;
+                position: relative;
+            }
+
+            label .imgName {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .imgName span {
+                font-family: Arial, Helvetica, sans-serif;
+                position: absolute;
+                top: 72%;
+                transform: translateY(-72%);
+            }
+
+            .imgName .imgContainer {
+                width: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 35%;
+                transform: translateY(-35%);
+            }
+
+            img {
+                width: 50px;
+                height: auto;
+            }
+
+            .check {
+                display: none;
+                position: absolute;
+                top: -4px;
+                right: -4px;
+            }
+
+            .check i {
+                font-size: 18px;
+            }
+
+            .category label:hover {
+                transform: translateY(-5px);
+                transition: transform 0.3s ease;
+                box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            }
+
+            .category label:not(:hover) {
+                transform: translateY(0);
+                box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+            }
+
+            .check:hover {
+                transform: scale(1.2);
+                transition: transform 0.3s ease;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="title">
+                <h4>Select a <span style="color: #6064b6">Payment</span> method:</h4></br>
+            </div>
+            <div class="category">
+                <a href="cardform.jsp">
+                    <label for="card" class="CardMethod">
+                        <div class="imgName">
+                            <div class="imgContainer debitCard">
+                                <img src="debitcard.png" alt="Cards">
+                            </div>
+                            <span class="name">Debit Card/Credit Card</span>
+                        </div>
+                        <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
+                    </label>
+                    </br>
+                </a>
+                <a href="ewalletform.jsp">
+                    <label for="ewallet" class="EwalletMethod">
+                        <div class="imgName">
+                            <div class="imgContainer tngEwallet">
+                                <img src="ewallet.png" alt="E-Wallet">
+                            </div>
+                            <span class="name">E-Wallet</span>
+                        </div>
+                        <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
+                    </label>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
