@@ -78,6 +78,12 @@
                     </div>
                 </div>
 
+                <div style="position: absolute; left: 0; margin-top: 71px; display: inline-flex; flex-direction: column; margin-left: 32px;">
+                    <div style="width: 295px; height: 24px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: inline-flex;">
+                        <div style="margin-left: 10px; margin-top: 160px; margin-right: 260px; width: 295px; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word;">Price:</div>
+                    </div>
+                </div>
+
                 <div style = "margin-left: 540px; margin-top: -23px">
                     <div style="width: 295px; height: 24px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: inline-flex">
                         <div style="width: 295px; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word">Experience Level:</div>
@@ -95,8 +101,14 @@
                         <div style="width: 295px; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word">Contributor:</div>
                     </div>
                 </div>
+
                 <!--description-->
-                <input type="text" value="<% prod.getSynopsis(); %>" name="Synopsis" style="width: 447px; height: 200px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 32px; top: 181px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid;margin-bottom:5px">
+                <input type="text" name="Synopsis" style="width: 447px; height: 80px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 32px; top: 181px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid;margin-bottom:5px">
+
+
+                <!--Price-->
+                <input type="text" name="Price" style="width: 447px; height: 40px; padding-left: 16px; padding-right: 16px; padding-top: 8px; margin-top: 160px; padding-bottom: 8px; left: 32px; top: 181px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid;margin-bottom:5px">
+
 
                 <!--Skills Gained-->
                 <div style = "margin-top: 76px; margin-left: 23px">
@@ -138,7 +150,7 @@
                 <div style="left: 523px; top: 29px; position: absolute"></div>
                 <div style="width: 154px; left: 430px; top: 29px; position: absolute; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word">Duration (Weeks): </div>
                 <!--Duration Input-->
-                <input type="text" value="<% prod.getDuration(); %>" name="Duration" style="width: 221px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 569px; top: 26px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
+                <input type="text" value="<% prod.getDuration();%>" name="Duration" style="width: 221px; height: 23px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 569px; top: 26px; position: absolute; background: white; border-radius: 8px; border: 1px #E0E0E0 solid">
                 <div style="width: 120px; left: 19px; top: 93px; position: absolute; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word">Course Name:</div>
                 <div style="left: 533px; top: 93px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: inline-flex">
                     <div style="width: 88px; color: black; font-size: 16px; font-family: Ubuntu, sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word">Category:</div>
