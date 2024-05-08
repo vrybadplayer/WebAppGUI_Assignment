@@ -302,4 +302,48 @@ public class Product {
         return null;
     }
 
+    public static ArrayList<Product> SearchLike(String input) {
+
+        ArrayList<Product> productList = new ArrayList<>();
+        //Connection
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            String sql = "SELECT * FROM " + tableName + " WHERE CourseName LIKE ?";
+
+            //Prepare SQL Statement
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, "%" + input + "%");
+                
+                //Get ResultSet
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        Product product = new Product(
+                                rs.getInt("ProdID"),
+                                rs.getString("CourseName"),
+                                rs.getDouble("Price"),
+                                rs.getString("Synopsis"),
+                                rs.getInt("Duration"),
+                                rs.getString("Experience_Level"),
+                                rs.getString("Organizer"),
+                                rs.getString("Contributor"),
+                                rs.getString("Skills_Gained"),
+                                rs.getString("Modules"),
+                                rs.getString("Objective"),
+                                rs.getString("Category"),
+                                rs.getDouble("Rating"),
+                                rs.getInt("Reviews")
+                        );
+
+                        productList.add(product);
+                    }
+                }
+            }
+
+            return productList;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Handle the exception properly in your application
+        }
+        return null;
+    }
+
 }

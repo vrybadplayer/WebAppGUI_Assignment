@@ -161,3 +161,71 @@ button {
   height: 100%;
   object-fit: cover;
 }
+
+.no-products-available {
+  position: absolute;
+  width: 756px;
+  height: 264px;
+  top: 297px;
+  left: 454px;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 73.536px;
+  text-align: center;
+  z-index: 2;
+}
+.br {
+  position: relative;
+  color: #8400a5;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 73.536px;
+  text-align: center;
+}
+.no-products-available-1 {
+  position: relative;
+  color: #000000;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 73.536px;
+  text-align: center;
+}
+.br-2 {
+  position: relative;
+  color: #8400a5;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 73.536px;
+  text-align: center;
+}
+.consider-searching {
+  position: relative;
+  color: #000000;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 73.536px;
+  text-align: center;
+}
+.empty {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  width: 756px;
+  height: 169px;
+  top: 440px;
+  left: 454px;
+  color: #8400a5;
+  font-family: Ubuntu, var(--default-font-family);
+  font-size: 128px;
+  font-weight: 700;
+  line-height: 147.072px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 3;
+}

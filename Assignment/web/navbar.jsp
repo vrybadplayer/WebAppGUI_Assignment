@@ -29,7 +29,7 @@
                 <input type="checkbox" name="" id="toggler">
                 <label for="toggler" class="fas fa-bars"></label>
 
-                <form class="searchBar">
+                <form class="searchBar" method="POST" action="SearchBarServlet">
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     <input type="text" placeholder="Search.." name="search">
                 </form>
@@ -118,7 +118,6 @@
 
             </div>
         </div>
-
         <script src="main.js"></script>
 
 

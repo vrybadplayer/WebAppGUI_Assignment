@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Product List</title>
+        <title>Product Search</title>
         <link rel="stylesheet" href="main_1.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -16,28 +16,38 @@
         <%@page import="java.util.ArrayList"%>
 
         <%
-            ArrayList<Product> productList = Product.SearchCategory(request.getParameter("Category"));
-            int totalProducts = productList.size();
-            //Get How Many Rows
-            int rows = totalProducts / 3;
+            ArrayList<Product> productList = Product.SearchLike(request.getParameter("search"));
+
+            int totalProducts = 0;
+            int rows = 0;
             int productNo = 0;
-            if (totalProducts % 3 != 0) {
-                ++rows;
-            }
-            String getCategory = productList.get(0).getCategory();
-            String categoryImage;
-            if (getCategory.equals("Language"))
-                categoryImage = "language";
-            else if (getCategory.equals("Design"))
-                categoryImage = "design";
-            else if (getCategory.equals("Accounting"))
-                categoryImage = "accounting";
-            else if (getCategory.equals("InformationTechnology"))
-                categoryImage = "it";
-            else if (getCategory.equals("Business"))
-                categoryImage = "business";
-            else {
-                categoryImage = "";
+            String getCategory;
+            String categoryImage = null;
+            boolean noProducts = true;
+
+            if (!(productList == null)) {
+                noProducts = false;
+                totalProducts = productList.size();
+                //Get How Many Rows
+                rows = totalProducts / 3;
+                productNo = 0;
+                if (totalProducts % 3 != 0) {
+                    ++rows;
+                }
+                getCategory = productList.get(0).getCategory();
+                if (getCategory.equals("Language")) {
+                    categoryImage = "language";
+                } else if (getCategory.equals("Design")) {
+                    categoryImage = "design";
+                } else if (getCategory.equals("Accounting")) {
+                    categoryImage = "accounting";
+                } else if (getCategory.equals("InformationTechnology")) {
+                    categoryImage = "it";
+                } else if (getCategory.equals("Business")) {
+                    categoryImage = "business";
+                } else {
+                    categoryImage = "";
+                }
             }
         %>
 
@@ -56,7 +66,7 @@
                 <input type="checkbox" name="" id="toggler">
                 <label for="toggler" class="fas fa-bars"></label>
 
-                <form class="searchBar" method="POST" action="SearchBarServlet">
+                <form class="searchBar">
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     <input type="text" placeholder="Search.." name="search">
                 </form>
@@ -149,31 +159,43 @@
 
         <div class="main-container">
             <div class="background">
-                <span class="category-name">Category: <%= productList.get(0).getCategory()%></span>
+                <span class="category-name">Search: <%= request.getParameter("search")%></span>
                 <%
-                    int picNo = 1;
-                    for (int i = 0; i < rows; ++i) {
-                        out.println("<div class=\"flex-row-fcb\">");
-                        for (int maxInRow = 0; maxInRow < 3; ++maxInRow) {
-                            if (productNo < totalProducts) {
-                                out.println("<div class=\"box\">");
-                                out.println("<a href=\"Products.jsp?productId=" + productList.get(productNo).getId() + "&picNo=" + picNo + "&category=" + categoryImage + "\" class=\"box\">");
-                                //Change image address to properly named images later
-                                out.println("    <div class=\"course-image\"><img src=\"./assets/courseImages/" + categoryImage + picNo + ".jpg\" alt=\"Product Image\"></div>");
-                                out.println("    <span class=\"course-title\">" + productList.get(productNo).getName() + "</span>");
-                                out.println("    <span class=\"reviews\">" + productList.get(productNo).getReviews() + " Reviews</span>");
-                                out.println("    <span class=\"description\">" + productList.get(productNo).getSynopsis() + "</span>");
-                                out.println("    <span class=\"price\">RM" + productList.get(productNo).getPrice() + "</span>");
-                                out.println("</a>");
-                                out.println("</div>");
-                                ++productNo;
-                                ++picNo;
-                                if (picNo == 11) {
-                                    picNo = 1;
+                    if (!noProducts) {
+                        int picNo = 1;
+                        for (int i = 0; i < rows; ++i) {
+                            out.println("<div class=\"flex-row-fcb\">");
+                            for (int maxInRow = 0; maxInRow < 3; ++maxInRow) {
+                                if (productNo < totalProducts) {
+                                    out.println("<div class=\"box\">");
+                                    out.println("<a href=\"Products.jsp?productId=" + productList.get(productNo).getId() + "&picNo=" + picNo + "&category=" + categoryImage + "\" class=\"box\">");
+                                    //Change image address to properly named images later
+                                    out.println("    <div class=\"course-image\"><img src=\"./assets/courseImages/" + categoryImage + picNo + ".jpg\" alt=\"Product Image\"></div>");
+                                    out.println("    <span class=\"course-title\">" + productList.get(productNo).getName() + "</span>");
+                                    out.println("    <span class=\"reviews\">" + productList.get(productNo).getReviews() + " Reviews</span>");
+                                    out.println("    <span class=\"description\">" + productList.get(productNo).getSynopsis() + "</span>");
+                                    out.println("    <span class=\"price\">RM" + productList.get(productNo).getPrice() + "</span>");
+                                    out.println("</a>");
+                                    out.println("</div>");
+                                    ++productNo;
+                                    ++picNo;
+                                    if (picNo == 11) {
+                                        picNo = 1;
+                                    }
                                 }
                             }
+                            out.println("</div>");
                         }
+                    } else {
+                        out.println("<div class=\"no-products-available\">");
+                        out.println("<span class=\"br\">{</span>");
+                        out.println("<span class=\"no-products-available-1\"> No Products Available </span>");
+                        out.println("<span class=\"br-2\">}<br /></span>");
+                        out.println("<span class=\"consider-searching\">");
+                        out.println("<br />Consider Searching<br />Another Name</span>");
+                        out.println("<br />Consider Searching<br />" + noProducts +"</span>");
                         out.println("</div>");
+                        out.println("<span class=\"empty\">{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span>");
                     }
 
                 %>
