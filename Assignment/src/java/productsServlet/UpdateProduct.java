@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -107,20 +109,23 @@ public class UpdateProduct extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+        @PersistenceContext
+    private EntityManager em;
+
+    @Resource
+    private UserTransaction utx;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        EntityManager em = (EntityManager) request.getAttribute("javax.persistence.EntityManager");
-
-        UserTransaction utx = (UserTransaction) request.getAttribute("javax.transaction.UserTransaction");
-
-        EntityTransaction transaction = null;
+       EntityTransaction transaction = null;
         try {
             utx.begin();
             transaction = em.getTransaction();
 
             javax.persistence.Query query = em.createNamedQuery("ProductModel.updateProduct");
+
 
             query.setParameter("prodId", Integer.parseInt(request.getParameter("ProdID")));
             query.setParameter("courseName", request.getParameter("CourseName"));
