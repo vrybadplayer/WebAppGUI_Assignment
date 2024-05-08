@@ -33,20 +33,15 @@ public class DeleteProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Product prod = new Product();
-        int ProdID = Integer.parseInt(request.getParameter("ProdID"));
-        prod.deleteRecord(ProdID);
-        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Delete Product</title>");
+            out.println("<title>Servlet AddNewProducts</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<script type=\"text/javascript\">alert('Product record deleted successfully');");
-            out.println("window.open('productDelete.jsp', '_self');");
-            out.println("</script>");
+            out.println("<h1>Servlet AddNewProducts at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -78,25 +73,10 @@ public class DeleteProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        EntityManager em = (EntityManager) request.getAttribute("javax.persistence.EntityManager");
 
-        UserTransaction utx = (UserTransaction) request.getAttribute("javax.transaction.UserTransaction");
-
-        EntityTransaction transaction = null;
-        
         try {
-            utx.begin();
-            transaction = em.getTransaction();
 
-            javax.persistence.Query query = em.createNamedQuery("ProductModel.deleteProduct");
-
-            query.setParameter("prodId", Integer.parseInt(request.getParameter("ProdID")));
-            
-            //Update
-            query.executeUpdate();
-
-            transaction.commit();
+            Product.deleteRecord(Integer.parseInt(request.getParameter("ProdID")));
 
             try (PrintWriter error = response.getWriter()) {
                 error.println("<!DOCTYPE html>");
@@ -109,9 +89,6 @@ public class DeleteProduct extends HttpServlet {
                 error.println("</html>");
             }
         } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
-            }
             e.printStackTrace();
             try (PrintWriter error = response.getWriter()) {
                 error.println("<!DOCTYPE html>");

@@ -2,6 +2,7 @@ package domain;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Product {
 
@@ -312,7 +313,7 @@ public class Product {
             //Prepare SQL Statement
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, "%" + input + "%");
-                
+
                 //Get ResultSet
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
@@ -344,6 +345,73 @@ public class Product {
             ex.printStackTrace(); // Handle the exception properly in your application
         }
         return null;
+    }
+
+    public static void UpdateProduct(int prodID, String courseName, String synopsis, double price, int duration, String experienceLevel, String organizer, String contributor, String skillsGained,
+            String modules, String objective, String category) {
+        Product prod = Product.SearchProduct(prodID);
+        //Connection
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            String sql = "UPDATE Product SET CourseName = ?, Synopsis = ?, Price = ?, Duration = ?, Experience_Level = ?, Organizer = ?, Contributor = ?, Skills_Gained = ?, Modules = ?, Objective = ?, Category = ?, Rating = " + prod.getRating() + ", Reviews = " + prod.getReviews() + " WHERE ProdID = ?;";
+
+            //Prepare SQL Statement
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, courseName);
+                stmt.setString(2, synopsis);
+                stmt.setDouble(3, price);
+                stmt.setInt(4, duration);
+                stmt.setString(5, experienceLevel);
+                stmt.setString(6, organizer);
+                stmt.setString(7, contributor);
+                stmt.setString(8, skillsGained);
+                stmt.setString(9, modules);
+                stmt.setString(10, objective);
+                stmt.setString(11, category);
+                stmt.setInt(12, prodID);
+
+                //Execute statement
+                stmt.executeUpdate();
+
+            }
+        } catch (SQLException ex) {
+        }
+    }
+
+    public static void AddProduct(String courseName, String synopsis, double price, int duration, String experienceLevel,
+            String organizer, String contributor, String skillsGained, String modules, String objective, String category) {
+
+        // Generate random rating between 0.0 and 5.0
+        double rating = new Random().nextDouble() * 5.0;
+
+        // Generate random reviews between 0 and 150
+        int reviews = new Random().nextInt(151);
+
+        // Connection
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            // Prepare SQL statement
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, Product.NextProductID());
+                stmt.setString(2, courseName);
+                stmt.setString(3, synopsis);
+                stmt.setDouble(4, price);
+                stmt.setInt(5, duration);
+                stmt.setString(6, experienceLevel);
+                stmt.setString(7, organizer);
+                stmt.setString(8, contributor);
+                stmt.setString(9, skillsGained);
+                stmt.setString(10, modules);
+                stmt.setString(11, objective);
+                stmt.setString(12, category);
+                stmt.setDouble(13, rating);
+                stmt.setInt(14, reviews);
+
+                stmt.executeUpdate();
+            }
+        } catch (SQLException ex) {
+
+        }
     }
 
 }
